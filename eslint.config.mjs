@@ -9,6 +9,9 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-const eslintConfig = [...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier')];
+const eslintConfig = [
+  { ignores: ['.next/**', 'design_handoff_expenses/**'] },
+  ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
+];
 
 export default eslintConfig;

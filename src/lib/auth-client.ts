@@ -60,7 +60,7 @@ async function readProblemDetail(response: Response, fallbackMessage: string): P
   throw new ApiRequestError(response.status, data, fallbackMessage);
 }
 
-async function readJsonResponse<T>(response: Response, fallbackMessage: string): Promise<T> {
+export async function readJsonResponse<T>(response: Response, fallbackMessage: string): Promise<T> {
   if (!response.ok) {
     await readProblemDetail(response, fallbackMessage);
   }

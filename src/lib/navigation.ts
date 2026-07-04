@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from 'react';
-import { LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, ReceiptText } from 'lucide-react';
 
 type NavIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -38,5 +38,11 @@ export const navigation: NavItem[] = [
     headerTitle: 'Dashboard',
     href: '/dashboard',
     icon: LayoutDashboard,
+  },
+  {
+    label: 'Gastos',
+    headerTitle: 'Gastos',
+    href: '/expenses',
+    icon: ReceiptText,
   },
 ];
