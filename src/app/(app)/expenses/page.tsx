@@ -11,6 +11,7 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { ApiRequestError } from '@/lib/auth-client';
 import type { CreateExpenseRequest, Currency, Expense, PaymentMethod, Tag } from '@/lib/expenses';
 import { formatApiAmount, formatUnits, parseDecimalToUnits, sumUnits } from '@/lib/money';
+import type { RecurringExpense } from '@/lib/recurring-expenses';
 import {
   useCreateExpense,
   useCurrencies,
@@ -18,6 +19,7 @@ import {
   usePaymentMethods,
   useTags,
 } from '@/lib/use-expenses';
+import { useRecurringExpenses } from '@/lib/use-recurring-expenses';
 import { cn } from '@/lib/utils';
 
 const GRID_STYLE: CSSProperties = {
@@ -66,12 +68,23 @@ export default function ExpensesPage() {
   const currenciesQuery = useCurrencies();
   const tagsQuery = useTags();
   const paymentMethodsQuery = usePaymentMethods();
+  const recurringQuery = useRecurringExpenses();
   const createMutation = useCreateExpense(month);
 
   const currencies = useMemo(() => currenciesQuery.data ?? [], [currenciesQuery.data]);
   const tags = tagsQuery.data ?? [];
   const paymentMethods = paymentMethodsQuery.data ?? [];
   const expenses = useMemo(() => expensesQuery.data ?? [], [expensesQuery.data]);
+
+  // Auto-generated occurrences carry no description of their own — the label lives on the parent
+  // recurring expense, looked up by recurringExpenseId.
+  const recurringById = useMemo(() => {
+    const map = new Map<number, RecurringExpense>();
+    for (const recurring of recurringQuery.data ?? []) {
+      map.set(recurring.id, recurring);
+    }
+    return map;
+  }, [recurringQuery.data]);
 
   const scaleByCode = useMemo(() => {
     const map = new Map<string, number>();
@@ -193,7 +206,16 @@ export default function ExpensesPage() {
           <EmptyState monthTitle={monthTitle} onCreate={() => setSheetOpen(true)} />
         ) : (
           visibleExpenses.map((expense) => (
-            <ExpenseRow key={expense.id} expense={expense} scaleFor={scaleFor} />
+            <ExpenseRow
+              key={expense.id}
+              expense={expense}
+              scaleFor={scaleFor}
+              recurring={
+                expense.recurringExpenseId !== null
+                  ? recurringById.get(expense.recurringExpenseId)
+                  : undefined
+              }
+            />
           ))
         )}
       </div>
@@ -237,13 +259,17 @@ function EmptyState({ monthTitle, onCreate }: { monthTitle: string; onCreate: ()
 function ExpenseRow({
   expense,
   scaleFor,
+  recurring,
 }: {
   expense: Expense;
   scaleFor: (code: string) => number;
+  recurring?: RecurringExpense;
 }) {
   const isRecurring = expense.recurringExpenseId !== null;
   const hasSettlement =
     expense.settlementAmount !== null && expense.settlementCurrencyCode !== null;
+  // Occurrences have no own description; fall back to the recurring expense's description or name.
+  const description = expense.description || recurring?.description || recurring?.name || null;
 
   return (
     <div
@@ -259,10 +285,10 @@ function ExpenseRow({
           <span
             className={cn(
               'truncate text-sm font-medium text-slate-950 dark:text-white',
-              !expense.description && 'text-slate-400 dark:text-slate-500'
+              !description && 'text-slate-400 dark:text-slate-500'
             )}
           >
-            {expense.description || 'Sin descripción'}
+            {description || 'Sin descripción'}
           </span>
           {isRecurring && (
             <span className="bg-primary/10 text-primary inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold">
