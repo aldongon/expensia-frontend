@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Plus, ReceiptText, Repeat } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { Field, inputClass } from '@/components/form-field';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { ApiRequestError } from '@/lib/auth-client';
 import type { CreateExpenseRequest, Currency, Expense, PaymentMethod, Tag } from '@/lib/expenses';
 import { formatApiAmount, formatUnits, parseDecimalToUnits, sumUnits } from '@/lib/money';
@@ -437,16 +438,13 @@ function NewExpenseSheet({
               <p className="text-muted-foreground max-w-xs text-sm">
                 Antes de registrar un gasto, creá al menos una moneda en tus datos de referencia.
               </p>
-              <Tooltip>
-                <TooltipTrigger
-                  render={
-                    <Button variant="outline" disabled>
-                      Crear mi primera moneda
-                    </Button>
-                  }
-                />
-                <TooltipContent>Próximamente</TooltipContent>
-              </Tooltip>
+              <Button
+                variant="outline"
+                render={<Link href="/currencies" />}
+                onClick={() => onOpenChange(false)}
+              >
+                Crear mi primera moneda
+              </Button>
             </div>
           </div>
         ) : (
@@ -601,28 +599,5 @@ function NewExpenseSheet({
         </div>
       </SheetContent>
     </Sheet>
-  );
-}
-
-const inputClass =
-  'h-9 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-950 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:border-slate-700 dark:bg-transparent dark:text-white';
-
-function Field({
-  label,
-  optional,
-  children,
-}: {
-  label: string;
-  optional?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
-        {label}
-        {optional && <span className="text-muted-foreground font-normal"> · opcional</span>}
-      </span>
-      {children}
-    </label>
   );
 }

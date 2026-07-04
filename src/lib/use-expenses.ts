@@ -3,7 +3,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
+  createCurrency,
   createExpense,
+  createPaymentMethod,
+  createTag,
   fetchCurrencies,
   fetchExpenses,
   fetchPaymentMethods,
@@ -46,6 +49,39 @@ export function useCreateExpense(month: string) {
     mutationFn: (body: CreateExpenseRequest) => createExpense(body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['expenses', month] });
+    },
+  });
+}
+
+export function useCreateCurrency() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createCurrency,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currencies'] });
+    },
+  });
+}
+
+export function useCreateTag() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createTag,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tags'] });
+    },
+  });
+}
+
+export function useCreatePaymentMethod() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createPaymentMethod,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['payment-methods'] });
     },
   });
 }
