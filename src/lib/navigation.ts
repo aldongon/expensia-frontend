@@ -1,5 +1,13 @@
 import type { ComponentType, SVGProps } from 'react';
-import { Coins, CreditCard, LayoutDashboard, ReceiptText, Repeat, Tags } from 'lucide-react';
+import {
+  Coins,
+  CreditCard,
+  LayoutDashboard,
+  ReceiptText,
+  Repeat,
+  Tags,
+  Wallet,
+} from 'lucide-react';
 
 type NavIcon = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -50,6 +58,12 @@ export const navigation: NavItem[] = [
     headerTitle: 'Recurrentes',
     href: '/recurring-expenses',
     icon: Repeat,
+  },
+  {
+    label: 'Presupuesto',
+    headerTitle: 'Presupuesto',
+    href: '/budgets',
+    icon: Wallet,
   },
   {
     label: 'Monedas',
