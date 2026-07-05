@@ -48,7 +48,10 @@ export function apiUrl(path: string) {
   return path.startsWith('/') ? path : `/${path}`;
 }
 
-async function readProblemDetail(response: Response, fallbackMessage: string): Promise<never> {
+export async function readProblemDetail(
+  response: Response,
+  fallbackMessage: string
+): Promise<never> {
   let data: ProblemDetail | null = null;
 
   try {
