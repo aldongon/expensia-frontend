@@ -1,0 +1,545 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ══════════════════════════════════════════════════════════════════════
+   Design tokens — ported from init-instructions/design/nocturne-styles.css,
+   re-themed to Expensia's green/cream palette per README.md "Design tokens".
+   Variable names match the design doc 1:1 so the Nocturne component layer
+   below (and any geometry copied from the prototype) needs no translation.
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light;
+
+  --color-bg: #f2ede1;
+  --color-surface: #e9e2d1;
+  --color-text: #1b2620;
+  --color-accent: #2f4f3f;
+  --color-divider: color-mix(in srgb, #1b2620 16%, transparent);
+
+  --color-neutral-100: #faf7ef;
+  --color-neutral-200: #efe9db;
+  --color-neutral-300: #ded7c6;
+  --color-neutral-400: #c3baa4;
+  --color-neutral-500: #a49a83;
+  --color-neutral-600: #837a66;
+  --color-neutral-700: #625c4d;
+  --color-neutral-800: #423e35;
+  --color-neutral-900: #2b2a24;
+
+  --color-accent-100: #e6ede6;
+  --color-accent-200: #d3e0d6;
+  --color-accent-300: #b4c9bb;
+  --color-accent-400: #8fae9b;
+  --color-accent-500: #5f8871;
+  --color-accent-600: #446a56;
+  --color-accent-700: #2f4f3f;
+  --color-accent-800: #223b2f;
+  --color-accent-900: #16261e;
+
+  --shadow-sm: 0 0 0 1px #ded7c6;
+  --shadow-md: 0 0 0 1px #d3cbb8, 0 6px 18px rgba(43, 38, 26, 0.1);
+  --shadow-lg: 0 0 0 1px #c3b9a2, 0 16px 40px rgba(43, 38, 26, 0.16);
+
+  --color-rail: linear-gradient(180deg, #eae3d2, #f2ede1);
+  --color-hover: #e2dac6;
+
+  --color-band: #223b2f;
+  --color-band-ink: #faf7ef;
+  --color-band-dim: #b4c9bb;
+  --color-band-deep: #16261e;
+  --color-band-line: #2f4f3f;
+
+  --color-chip-bg: #e6ede6;
+  --color-chip-ink: #223b2f;
+  --color-chip-line: #b4c9bb;
+
+  --color-chart-area: #d3e0d6;
+  --color-accent-ink: #2f4f3f;
+
+  --color-warn: #8a5a3c;
+  --color-warn-on-band: #e0a887;
+
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --color-bg: #101512;
+  --color-surface: #1a211c;
+  --color-text: #ece3cf;
+  --color-accent: #86b09a;
+  --color-divider: color-mix(in srgb, #ece3cf 18%, transparent);
+
+  --color-neutral-100: #ece3cf;
+  --color-neutral-200: #222a24;
+  --color-neutral-300: #2c342e;
+  --color-neutral-400: #4d5a51;
+  --color-neutral-500: #6f7d73;
+  --color-neutral-600: #8b998e;
+  --color-neutral-700: #9fada3;
+  --color-neutral-800: #2f3a33;
+  --color-neutral-900: #0b0f0c;
+
+  --color-accent-100: #d9e7dd;
+  --color-accent-200: #1e2c24;
+  --color-accent-300: #a9c6b4;
+  --color-accent-400: #6f9a83;
+  --color-accent-500: #86b09a;
+  --color-accent-600: #6f9a83;
+  --color-accent-700: #9dc0ab;
+  --color-accent-800: #223b2f;
+  --color-accent-900: #121b16;
+
+  --shadow-sm: 0 0 0 1px #283029;
+  --shadow-md: 0 0 0 1px #333c34, 0 6px 18px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 0 0 1px #4a544b, 0 16px 40px rgba(0, 0, 0, 0.6);
+
+  --color-rail: linear-gradient(180deg, #161d18, #101512);
+  --color-hover: #232c26;
+
+  --color-band: #1b2a22;
+  --color-band-ink: #f2ece0;
+  --color-band-dim: #a9c6b4;
+  --color-band-deep: #121b16;
+  --color-band-line: #2f4438;
+
+  --color-chip-bg: #1e2b24;
+  --color-chip-ink: #cfe2d5;
+  --color-chip-line: #3c5346;
+
+  --color-chart-area: #1e2c24;
+  --color-accent-ink: #9dc0ab;
+
+  --color-warn: #c98a63;
+  --color-warn-on-band: #e0a887;
+}
+
+/* Tailwind theme: spacing keyed to the 0.70x density scale so the standard numeric utilities
+   (p-*, gap-*, m-*) land on Nocturne's exact pixel steps (--spacing * 1/2/3/4/6/8 = 2.8/5.6/
+   8.4/11.2/16.8/22.4px). Radius and fonts are theme-invariant, so they're declared once here;
+   colors and shadows stay outside @theme and are consumed via var(--color-*) / shadow-[var(...)]
+   arbitrary values, so the .dark overrides above keep working without an alias layer. */
+@theme {
+  --spacing: 2.8px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Minimal shadcn-style aliases, needed only by the ported sonner.tsx toaster. */
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+  --border: var(--color-divider);
+  --radius: var(--radius-md);
+}
+
+@keyframes ex-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  h1 {
+    font-size: 42px;
+  }
+  h2 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 16px;
+  }
+  h6 {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-accent-ink);
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  :focus {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Nocturne component layer — ported from nocturne-styles.css, trimmed to the
+   classes the design actually uses (no .nav/.hr/.lighten/accent-2 variants).
+   Screen layout itself is built with Tailwind utilities; these classes cover
+   only the shared primitives the design names directly: buttons, form
+   fields, cards, tags, tables and dialogs.
+   ══════════════════════════════════════════════════════════════════════ */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--color-text);
+    background: transparent;
+    border: 1px solid transparent;
+    padding: var(--space-2) calc(var(--space-3) * 1.2);
+    border-radius: var(--radius-md);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .btn-primary:hover {
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+  .btn-primary:active {
+    background: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+  .btn-secondary {
+    border-color: var(--color-divider);
+  }
+  .btn-secondary:hover {
+    background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  }
+  .btn-secondary:active {
+    background: color-mix(in srgb, var(--color-text) 14%, transparent);
+  }
+  .btn-ghost {
+    color: var(--color-accent);
+    padding-inline: var(--space-1);
+  }
+  .btn-ghost:hover {
+    background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  }
+  .btn-ghost:active {
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+  .btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+
+  .field > label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  }
+  .input {
+    width: 100%;
+    min-height: 36px;
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--color-text);
+    caret-color: var(--color-accent);
+    background: var(--color-surface);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md);
+  }
+  .input:hover {
+    border-color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  }
+  .input:focus-visible {
+    border-color: var(--color-accent);
+    outline-offset: 0;
+  }
+  textarea.input {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .radio input,
+  .seg-opt input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+  .radio .dot {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-divider);
+  }
+  .radio:hover .dot {
+    border-color: var(--color-accent);
+  }
+  .radio input:checked + .dot {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    box-shadow: inset 0 0 0 4px var(--color-bg);
+  }
+  .radio input:focus-visible + .dot {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .seg {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md);
+  }
+  .seg-opt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .seg-opt + .seg-opt {
+    border-left: 1px solid var(--color-divider);
+  }
+  .seg-opt:has(input:checked) {
+    color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px var(--color-accent);
+  }
+  .seg-opt:not(:has(input:checked)):hover {
+    background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  }
+  .seg-opt:has(input:focus-visible) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  .card-kicker {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .card-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 1.2;
+  }
+  .card-body {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.8;
+    flex: 1;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: color-mix(in srgb, var(--color-text) 50%, transparent);
+  }
+  .elev-sm {
+    box-shadow: var(--shadow-sm);
+  }
+  .elev-md {
+    box-shadow: var(--shadow-md);
+  }
+  .elev-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    padding: 3px 10px;
+    border-radius: calc(var(--radius-md) * 0.75);
+  }
+  .tag-accent {
+    background: var(--color-accent-800);
+    color: var(--color-accent-100);
+  }
+  .tag-neutral {
+    background: var(--color-neutral-800);
+    color: var(--color-neutral-100);
+  }
+  .tag-outline {
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .table th {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    padding: var(--space-2);
+    border-bottom: 1px solid transparent;
+  }
+  .table td {
+    padding: var(--space-2);
+    border-bottom: 1px solid transparent;
+  }
+  .table thead tr {
+    background: linear-gradient(
+        to right,
+        transparent,
+        var(--color-divider) 48px,
+        var(--color-divider) calc(100% - 48px),
+        transparent
+      )
+      no-repeat bottom / 100% 1px;
+  }
+  .table tbody tr {
+    background: linear-gradient(
+        to right,
+        transparent,
+        color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+        color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px),
+        transparent
+      )
+      no-repeat bottom / 100% 1px;
+  }
+  .table tbody tr:hover {
+    background:
+      linear-gradient(
+          color-mix(in srgb, var(--color-text) 4%, transparent),
+          color-mix(in srgb, var(--color-text) 4%, transparent)
+        )
+        no-repeat 0 0 / 100% 100%,
+      linear-gradient(
+          to right,
+          transparent,
+          color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+          color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px),
+          transparent
+        )
+        no-repeat bottom / 100% 1px;
+  }
+
+  .dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+  }
+  .dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 50;
+    transform: translate(-50%, -50%);
+    max-height: calc(100vh - var(--space-8) * 2);
+    overflow-y: auto;
+    width: min(440px, calc(100% - var(--space-8) * 2));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+  .dialog-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 20px;
+  }
+  .dialog-body {
+    font-size: 14px;
+    opacity: 0.85;
+  }
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+}

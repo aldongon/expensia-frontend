@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-ea456d24-2511-4388-9b23-e5d9f35a7da0/styles.css">
+<script src="_ds/nocturne-ea456d24-2511-4388-9b23-e5d9f35a7da0/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<style>
+  .theme-light, .theme-dark { color-scheme: light; }
+  :root, .theme-light {
+    --color-bg: #f2ede1; --color-surface: #e9e2d1; --color-text: #1b2620;
+    --color-accent: #2f4f3f; --color-accent-2: #5f8871;
+    --color-divider: color-mix(in srgb, #1b2620 16%, transparent);
+    --color-neutral-100: #faf7ef; --color-neutral-200: #efe9db; --color-neutral-300: #ded7c6;
+    --color-neutral-400: #c3baa4; --color-neutral-500: #a49a83; --color-neutral-600: #837a66;
+    --color-neutral-700: #625c4d; --color-neutral-800: #423e35; --color-neutral-900: #2b2a24;
+    --color-accent-100: #e6ede6; --color-accent-200: #d3e0d6; --color-accent-300: #b4c9bb;
+    --color-accent-400: #8fae9b; --color-accent-500: #5f8871; --color-accent-600: #446a56;
+    --color-accent-700: #2f4f3f; --color-accent-800: #223b2f; --color-accent-900: #16261e;
+    --color-accent-2-100: #e6ede6; --color-accent-2-200: #d3e0d6; --color-accent-2-300: #b4c9bb;
+    --color-accent-2-400: #8fae9b; --color-accent-2-500: #5f8871; --color-accent-2-600: #446a56;
+    --color-accent-2-700: #2f4f3f; --color-accent-2-800: #223b2f; --color-accent-2-900: #16261e;
+    --shadow-sm: 0 0 0 1px #ded7c6;
+    --shadow-md: 0 0 0 1px #d3cbb8, 0 6px 18px rgba(43,38,26,0.10);
+    --shadow-lg: 0 0 0 1px #c3b9a2, 0 16px 40px rgba(43,38,26,0.16);
+    --color-rail: linear-gradient(180deg,#eae3d2,#f2ede1);
+    --color-hover: #e2dac6;
+    --color-band: #223b2f; --color-band-ink: #faf7ef; --color-band-dim: #b4c9bb;
+    --color-band-deep: #16261e; --color-band-line: #2f4f3f;
+    --color-chip-bg: #e6ede6; --color-chip-ink: #223b2f; --color-chip-line: #b4c9bb;
+    --color-chart-area: #d3e0d6; --color-accent-ink: #2f4f3f;
+    --color-warn: #8a5a3c; --color-warn-on-band: #e0a887;
+  }
+  .theme-dark {
+    color-scheme: dark;
+    --color-bg: #101512; --color-surface: #1a211c; --color-text: #ece3cf;
+    --color-accent: #86b09a; --color-accent-2: #86b09a;
+    --color-divider: color-mix(in srgb, #ece3cf 18%, transparent);
+    --color-neutral-100: #ece3cf; --color-neutral-200: #222a24; --color-neutral-300: #2c342e;
+    --color-neutral-400: #4d5a51; --color-neutral-500: #6f7d73; --color-neutral-600: #8b998e;
+    --color-neutral-700: #9fada3; --color-neutral-800: #2f3a33; --color-neutral-900: #0b0f0c;
+    --color-accent-100: #d9e7dd; --color-accent-200: #1e2c24; --color-accent-300: #a9c6b4;
+    --color-accent-400: #6f9a83; --color-accent-500: #86b09a; --color-accent-600: #6f9a83;
+    --color-accent-700: #9dc0ab; --color-accent-800: #223b2f; --color-accent-900: #121b16;
+    --color-accent-2-100: #d9e7dd; --color-accent-2-200: #1e2c24; --color-accent-2-300: #a9c6b4;
+    --color-accent-2-400: #6f9a83; --color-accent-2-500: #86b09a; --color-accent-2-600: #6f9a83;
+    --color-accent-2-700: #9dc0ab; --color-accent-2-800: #223b2f; --color-accent-2-900: #121b16;
+    --shadow-sm: 0 0 0 1px #283029;
+    --shadow-md: 0 0 0 1px #333c34, 0 6px 18px rgba(0,0,0,0.50);
+    --shadow-lg: 0 0 0 1px #4a544b, 0 16px 40px rgba(0,0,0,0.60);
+    --color-rail: linear-gradient(180deg,#161d18,#101512);
+    --color-hover: #232c26;
+    --color-band: #1b2a22; --color-band-ink: #f2ece0; --color-band-dim: #a9c6b4;
+    --color-band-deep: #121b16; --color-band-line: #2f4438;
+    --color-chip-bg: #1e2b24; --color-chip-ink: #cfe2d5; --color-chip-line: #3c5346;
+    --color-chart-area: #1e2c24; --color-accent-ink: #9dc0ab;
+    --color-warn: #c98a63; --color-warn-on-band: #e0a887;
+  }
+  @keyframes ex-pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.45 } }
+  body { margin: 0; background: #f2ede1; color: #1b2620; }
+  a { color: var(--color-accent-ink); }
+  a:hover { color: var(--color-accent); }
+</style>
+</helmet>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <rect width="120" height="120" fill="#223b2f"></rect>
+    <rect x="30" y="72" width="10" height="18" rx="2" fill="#b4c9bb"></rect>
+    <rect x="46" y="58" width="10" height="32" rx="2" fill="#b4c9bb"></rect>
+    <rect x="62" y="42" width="10" height="48" rx="2" fill="#f2ede1"></rect>
+    <rect x="78" y="30" width="10" height="60" rx="2" fill="#f2ede1"></rect>
+  </svg>
+</template>
+<div class="{{ themeClass }}" style="display:flex;min-height:100vh;align-items:stretch;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body)">
+
+  <nav style="width:212px;flex:none;display:flex;flex-direction:column;gap:22.4px;padding:16.8px 11.2px;background:var(--color-rail)">
+    <div style="display:flex;align-items:center;gap:8.4px;padding:0 8.4px">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--color-accent);box-shadow:0 0 12px var(--color-accent)"></span>
+      <span style="font-family:var(--font-heading);font-weight:500;font-size:18px;letter-spacing:-0.015em">Expensia</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2.8px">
+      <button onClick="{{ goResumen }}" style="display:flex;align-items:center;gap:10px;padding:7px 8.4px;border:0;border-radius:8px;background:transparent;cursor:pointer;font:inherit;font-size:14px;text-align:left;color:{{ navResumen }}" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+        <i class="ph ph-chart-donut" style="font-size:17px"></i>Resumen
+      </button>
+      <button onClick="{{ goGastos }}" style="display:flex;align-items:center;gap:10px;padding:7px 8.4px;border:0;border-radius:8px;background:transparent;cursor:pointer;font:inherit;font-size:14px;text-align:left;color:{{ navGastos }}" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+        <i class="ph ph-receipt" style="font-size:17px"></i>Gastos
+      </button>
+      <button onClick="{{ goRecurrentes }}" style="display:flex;align-items:center;gap:10px;padding:7px 8.4px;border:0;border-radius:8px;background:transparent;cursor:pointer;font:inherit;font-size:14px;text-align:left;color:{{ navRecurrentes }}" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+        <i class="ph ph-arrows-clockwise" style="font-size:17px"></i>Recurrentes
+      </button>
+      <button onClick="{{ goPresupuesto }}" style="display:flex;align-items:center;gap:10px;padding:7px 8.4px;border:0;border-radius:8px;background:transparent;cursor:pointer;font:inherit;font-size:14px;text-align:left;color:{{ navPresupuesto }}" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+        <i class="ph ph-target" style="font-size:17px"></i>Presupuesto
+      </button>
+      <button onClick="{{ goCatalogos }}" style="display:flex;align-items:center;gap:10px;padding:7px 8.4px;border:0;border-radius:8px;background:transparent;cursor:pointer;font:inherit;font-size:14px;text-align:left;color:{{ navCatalogos }}" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+        <i class="ph ph-tag" style="font-size:17px"></i>Catálogos
+      </button>
+    </div>
+
+    <label style="margin-top:auto;display:flex;align-items:center;gap:8.4px;cursor:pointer;padding:7px 8.4px;border-radius:8px;font-size:13px" style-hover="background:var(--color-hover)">
+      <span style="position:relative;width:34px;height:18px;flex:none;border-radius:9px;background:{{ trackBg }};box-shadow:inset 0 0 0 1px var(--color-divider);transition:background .18s">
+        <input type="checkbox" checked="{{ isDark }}" onChange="{{ toggleTheme }}" style="position:absolute;opacity:0;width:0;height:0;pointer-events:none">
+        <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--color-accent);transform:translateX({{ knobX }});transition:transform .18s"></span>
+      </span>
+      <i class="ph {{ themeIcon }}" style="font-size:15px"></i>{{ themeLabel }}
+    </label>
+
+    <div style="display:flex;flex-direction:column;gap:2.8px;padding:8.4px;border-radius:8px;box-shadow:var(--shadow-sm)">
+      <span style="font-size:13px">ana@correo.com</span>
+      <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">America/Argentina/Buenos_Aires</span>
+      <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">Sesión válida 24 h</span>
+    </div>
+  </nav>
+
+  <main style="flex:1;min-width:0;padding:22.4px 22.4px 44.8px;display:flex;flex-direction:column;gap:22.4px">
+
+    <sc-if value="{{ showLoading }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22.4px" aria-busy="true">
+        <div style="display:flex;flex-direction:column;gap:8.4px">
+          <div style="width:220px;height:30px;border-radius:8px;background:var(--color-neutral-300);animation:ex-pulse 1.4s ease-in-out infinite"></div>
+          <div style="width:320px;height:11px;border-radius:4px;background:var(--color-neutral-300);animation:ex-pulse 1.4s ease-in-out .1s infinite"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md)">
+          <div style="display:flex;flex-direction:column;gap:11.2px;padding:22.4px;background:var(--color-band)">
+            <div style="width:120px;height:10px;border-radius:4px;background:var(--color-band-line);animation:ex-pulse 1.4s ease-in-out infinite"></div>
+            <div style="width:70%;height:44px;border-radius:8px;background:var(--color-band-line);animation:ex-pulse 1.4s ease-in-out .15s infinite"></div>
+            <div style="height:5px;border-radius:3px;background:var(--color-band-deep)"></div>
+            <div style="display:flex;gap:22.4px;padding-top:11.2px">
+              <div style="width:64px;height:28px;border-radius:6px;background:var(--color-band-line);animation:ex-pulse 1.4s ease-in-out .2s infinite"></div>
+              <div style="width:64px;height:28px;border-radius:6px;background:var(--color-band-line);animation:ex-pulse 1.4s ease-in-out .3s infinite"></div>
+              <div style="width:64px;height:28px;border-radius:6px;background:var(--color-band-line);animation:ex-pulse 1.4s ease-in-out .4s infinite"></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:8.4px;padding:22.4px;background:var(--color-surface);min-height:190px">
+            <div style="display:flex;align-items:flex-end;gap:6px;height:110px">
+              <sc-for list="{{ skeletonBars }}" as="b" hint-placeholder-count="12">
+                <div style="flex:1;border-radius:4px 4px 0 0;background:var(--color-neutral-300);animation:ex-pulse 1.4s ease-in-out infinite;animation-delay:{{ b.delay }};height:{{ b.h }}%"></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5.6px">
+          <sc-for list="{{ skeletonRows }}" as="r" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:11.2px;padding:11.2px;border-radius:8px;background:var(--color-surface);box-shadow:var(--shadow-sm)">
+              <div style="width:44px;height:12px;border-radius:4px;background:var(--color-neutral-300);animation:ex-pulse 1.4s ease-in-out infinite;animation-delay:{{ r.delay }}"></div>
+              <div style="width:{{ r.w }}%;height:12px;border-radius:4px;background:var(--color-neutral-300);animation:ex-pulse 1.4s ease-in-out infinite;animation-delay:{{ r.delay }}"></div>
+              <div style="margin-left:auto;width:90px;height:12px;border-radius:4px;background:var(--color-neutral-300);animation:ex-pulse 1.4s ease-in-out infinite;animation-delay:{{ r.delay }}"></div>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">Cargando {{ stateScope }}…</span>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showError }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16.8px;max-width:560px;padding:22.4px;border-radius:14px;background:var(--color-surface);box-shadow:var(--shadow-md)" role="alert">
+        <div style="display:flex;align-items:center;gap:11.2px">
+          <span style="width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--color-chip-bg);color:var(--color-warn)"><i class="ph ph-warning-circle" style="font-size:20px"></i></span>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <h4 style="margin:0">No pudimos cargar {{ stateScope }}</h4>
+            <span style="font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">{{ errorStatus }}</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;padding:11.2px;border-radius:8px;background:var(--color-chip-bg)">
+          <span style="font-size:13px;color:var(--color-chip-ink)">{{ errorDetail }}</span>
+          <code style="font-size:10px;color:var(--color-accent-ink)">application/problem+json</code>
+        </div>
+        <div style="display:flex;gap:8.4px">
+          <button class="btn btn-primary" onClick="{{ retry }}"><i class="ph ph-arrows-clockwise"></i>Reintentar</button>
+          <button class="btn btn-secondary" onClick="{{ goResumen }}">Ir al resumen</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16.8px;max-width:520px;padding:22.4px;border-radius:14px;box-shadow:var(--shadow-sm)">
+        <div style="display:flex;align-items:flex-end;gap:4px;height:44px;opacity:0.5">
+          <div style="width:12px;height:30%;border-radius:3px 3px 0 0;background:var(--color-neutral-400)"></div>
+          <div style="width:12px;height:55%;border-radius:3px 3px 0 0;background:var(--color-neutral-400)"></div>
+          <div style="width:12px;height:22%;border-radius:3px 3px 0 0;background:var(--color-neutral-400)"></div>
+          <div style="width:12px;height:70%;border-radius:3px 3px 0 0;background:var(--color-accent-400)"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5.6px">
+          <h4 style="margin:0">{{ emptyTitle }}</h4>
+          <p style="margin:0;font-size:13px;color:color-mix(in srgb, var(--color-text) 60%, transparent);max-width:46ch">{{ emptyBody }}</p>
+        </div>
+        <button class="btn btn-primary" onClick="{{ emptyAction }}" style="align-self:flex-start">{{ emptyActionLabel }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showData }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:22.4px">
+
+    <sc-if value="{{ vResumen }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:22.4px">
+        <header style="display:flex;flex-direction:column;gap:2.8px">
+          <h2 style="margin:0">Septiembre 2026</h2>
+          <sc-if value="{{ hints }}" hint-placeholder-val="{{ true }}">
+            <code style="font-size:11px;color:color-mix(in srgb, var(--color-text) 45%, transparent)">GET /api/budgets/current · GET /api/expenses?month=2026-09</code>
+          </sc-if>
+        </header>
+
+        <sc-if value="{{ hasBudget }}" hint-placeholder-val="{{ true }}">
+          <section style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md)">
+            <div style="display:flex;flex-direction:column;gap:16.8px;padding:22.4px;background:var(--color-band);color:var(--color-band-ink)">
+              <div style="display:flex;flex-direction:column;gap:2.8px">
+                <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-band-dim)">Disponible este mes</span>
+                <span style="font-family:var(--font-heading);font-size:44px;line-height:1.05;font-variant-numeric:tabular-nums;color:{{ remColorLight }}">{{ bRemaining }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5.6px">
+                <div style="height:5px;border-radius:3px;background:var(--color-band-deep);overflow:hidden">
+                  <div style="height:100%;border-radius:3px;background:var(--color-band-dim);width:{{ spentPct }}%"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;gap:11.2px;font-size:11px;color:var(--color-band-dim)">
+                  <span>{{ spentLabel }}</span>
+                  <span>de {{ bTotal }}</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:22.4px;flex-wrap:wrap;padding-top:11.2px;box-shadow:inset 0 1px 0 var(--color-band-line)">
+                <div style="display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11px;color:var(--color-band-dim)">Por día</span>
+                  <span style="font-family:var(--font-heading);font-size:20px;font-variant-numeric:tabular-nums">{{ bDaily }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11px;color:var(--color-band-dim)">Días restantes</span>
+                  <span style="font-family:var(--font-heading);font-size:20px;font-variant-numeric:tabular-nums">{{ daysCount }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11px;color:var(--color-band-dim)">Ritmo</span>
+                  <span style="font-family:var(--font-heading);font-size:20px">{{ paceLabel }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:11.2px;padding:22.4px;background:var(--color-surface)">
+              <div style="display:flex;align-items:baseline;gap:8.4px">
+                <h6 style="margin:0;color:var(--color-accent-ink)">Acumulado del mes</h6>
+                <span style="margin-left:auto;display:flex;align-items:center;gap:11.2px;font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">
+                  <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:2px;background:var(--color-accent)"></span>real</span>
+                  <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:0;border-top:2px dashed var(--color-neutral-400)"></span>ideal</span>
+                  <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:0;border-top:2px dotted var(--color-accent-400)"></span>proyección</span>
+                </span>
+              </div>
+              <svg viewBox="0 0 600 168" style="width:100%;height:auto;overflow:visible" preserveAspectRatio="none">
+                <path d="{{ chartArea }}" style="fill:var(--color-chart-area)"></path>
+                <path d="{{ chartIdeal }}" fill="none" stroke-width="2" stroke-dasharray="5 5" style="stroke:var(--color-neutral-400)"></path>
+                <path d="{{ chartProj }}" fill="none" stroke-width="2" stroke-dasharray="2 4" style="stroke:var(--color-accent-400)"></path>
+                <path d="{{ chartLine }}" fill="none" stroke-width="2.5" stroke-linejoin="round" style="stroke:var(--color-accent)"></path>
+                <line x1="{{ chartTodayX }}" y1="8" x2="{{ chartTodayX }}" y2="{{ chartBase }}" stroke-width="1" style="stroke:var(--color-neutral-400)"></line>
+                <circle cx="{{ chartDotX }}" cy="{{ chartDotY }}" r="4" style="fill:var(--color-accent)"></circle>
+              </svg>
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">
+                <sc-for list="{{ chartLabels }}" as="l" hint-placeholder-count="4">
+                  <span>{{ l }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:11.2px">
+            <h4 style="margin:0">Dónde se fue el mes</h4>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:11.2px 22.4px">
+              <sc-for list="{{ byTag }}" as="t" hint-placeholder-count="5">
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;justify-content:space-between;gap:11.2px;align-items:baseline">
+                    <span style="font-size:13px">{{ t.name }}</span>
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums;color:color-mix(in srgb, var(--color-text) 65%, transparent)">{{ t.amountFmt }}</span>
+                  </div>
+                  <div style="height:6px;border-radius:3px;background:var(--color-neutral-300);overflow:hidden">
+                    <div style="height:100%;border-radius:3px;background:{{ t.color }};width:{{ t.pct }}%"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ noBudget }}" hint-placeholder-val="{{ false }}">
+          <section class="card elev-sm" style="gap:8.4px;max-width:520px">
+            <span class="card-kicker">Sin presupuesto</span>
+            <p class="card-body" style="opacity:1">No hay presupuesto configurado para este mes. <code style="font-size:11px">GET /api/budgets/current</code> devolvió 200 sin cuerpo.</p>
+            <button class="btn btn-primary" onClick="{{ goPresupuesto }}" style="align-self:flex-start">Crear presupuesto</button>
+          </section>
+        </sc-if>
+
+        <section style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22.4px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:11.2px;min-width:0">
+            <div style="display:flex;align-items:baseline;gap:11.2px">
+              <h4 style="margin:0">Últimos gastos</h4>
+              <button class="btn btn-ghost" onClick="{{ goGastos }}" style="font-size:13px">Ver el mes completo</button>
+            </div>
+            <table class="table">
+              <thead>
+                <tr><th>Fecha</th><th>Descripción</th><th style="text-align:right">Monto</th></tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{ recent }}" as="e" hint-placeholder-count="5">
+                  <tr>
+                    <td style="white-space:nowrap;color:color-mix(in srgb, var(--color-text) 60%, transparent)">{{ e.dateFmt }}</td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:5.6px;flex-wrap:wrap">
+                        <span>{{ e.description }}</span>
+                        <sc-if value="{{ e.auto }}" hint-placeholder-val="{{ false }}">
+                          <span class="tag tag-neutral">auto</span>
+                        </sc-if>
+                      </div>
+                    </td>
+                    <td style="text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums">{{ e.amountFmt }}</td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:11.2px;min-width:0">
+            <h4 style="margin:0">Totales por moneda</h4>
+            <div style="display:flex;flex-direction:column;gap:8.4px">
+              <sc-for list="{{ totals }}" as="t" hint-placeholder-count="2">
+                <div style="display:flex;justify-content:space-between;gap:11.2px;align-items:baseline;padding-bottom:5.6px;box-shadow:inset 0 -1px 0 var(--color-neutral-300)">
+                  <span style="font-size:13px;color:color-mix(in srgb, var(--color-text) 60%, transparent)">{{ t.code }}</span>
+                  <span style="font-variant-numeric:tabular-nums">{{ t.amountFmt }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <h4 style="margin:11.2px 0 0">Recurrentes activos</h4>
+            <div style="display:flex;flex-direction:column;gap:5.6px">
+              <sc-for list="{{ activeRec }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;justify-content:space-between;gap:11.2px;align-items:baseline;font-size:13px">
+                  <span>{{ r.name }}</span>
+                  <span style="font-variant-numeric:tabular-nums;color:color-mix(in srgb, var(--color-text) 70%, transparent)">{{ r.ruleFmt }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ vGastos }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16.8px">
+        <header style="display:flex;align-items:flex-end;gap:16.8px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:2.8px;margin-right:auto">
+            <h2 style="margin:0">Gastos</h2>
+            <sc-if value="{{ hints }}" hint-placeholder-val="{{ true }}">
+              <code style="font-size:11px;color:color-mix(in srgb, var(--color-text) 45%, transparent)">GET /api/expenses?month=2026-09 · orden expenseDate desc</code>
+            </sc-if>
+          </div>
+          <button class="btn btn-primary" onClick="{{ openNew }}"><i class="ph ph-plus"></i>Nuevo gasto</button>
+        </header>
+
+        <div class="seg" style="align-self:flex-start">
+          <label class="seg-opt">
+            <input type="radio" name="gtab" checked="{{ gDias }}" onChange="{{ goDias }}"><i class="ph ph-calendar-blank"></i>Por día
+          </label>
+          <label class="seg-opt">
+            <input type="radio" name="gtab" checked="{{ gAnalisis }}" onChange="{{ goAnalisis }}"><i class="ph ph-sliders-horizontal"></i>Selección
+          </label>
+        </div>
+
+        <sc-if value="{{ gAnalisis }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:16.8px">
+            <div style="display:flex;flex-direction:column;gap:11.2px;padding:16.8px;border-radius:14px;background:var(--color-surface);box-shadow:var(--shadow-sm)">
+              <div style="display:flex;align-items:center;gap:11.2px;flex-wrap:wrap">
+                <h6 style="margin:0;color:var(--color-accent-700);margin-right:auto">Tags incluidos</h6>
+                <button class="btn btn-ghost" onClick="{{ selAllTags }}" style="font-size:12px">Todos</button>
+                <button class="btn btn-ghost" onClick="{{ clearTags }}" style="font-size:12px">Limpiar</button>
+              </div>
+              <div style="display:flex;gap:5.6px;flex-wrap:wrap">
+                <sc-for list="{{ filterChips }}" as="t" hint-placeholder-count="6">
+                  <button onClick="{{ t.onToggle }}" style="border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};font:inherit;font-size:12px;padding:4px 11px;border-radius:6px;cursor:pointer">{{ t.name }}</button>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:11.2px;flex-wrap:wrap;padding-top:11.2px;box-shadow:inset 0 1px 0 var(--color-neutral-300)">
+                <span style="font-size:12px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">Gastos recurrentes</span>
+                <div class="seg">
+                  <label class="seg-opt">
+                    <input type="radio" name="recmode" checked="{{ recIncluir }}" onChange="{{ setRecIncluir }}">Incluir
+                  </label>
+                  <label class="seg-opt">
+                    <input type="radio" name="recmode" checked="{{ recExcluir }}" onChange="{{ setRecExcluir }}">Excluir
+                  </label>
+                  <label class="seg-opt">
+                    <input type="radio" name="recmode" checked="{{ recSolo }}" onChange="{{ setRecSolo }}">Sólo recurrentes
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md)">
+              <div style="display:flex;flex-direction:column;gap:2.8px;padding:16.8px 22.4px;background:var(--color-band);color:var(--color-band-ink)">
+                <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-band-dim)">Gastos incluidos</span>
+                <span style="font-family:var(--font-heading);font-size:36px;line-height:1.05;font-variant-numeric:tabular-nums">{{ selCount }}</span>
+                <span style="font-size:11px;color:var(--color-band-dim)">{{ selScopeLabel }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8.4px;padding:16.8px 22.4px;background:var(--color-surface)">
+                <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-ink)">Suma por moneda</span>
+                <sc-for list="{{ selSums }}" as="t" hint-placeholder-count="2">
+                  <span style="font-family:var(--font-heading);font-size:20px;font-variant-numeric:tabular-nums">{{ t.amountFmt }}</span>
+                </sc-for>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8.4px;padding:16.8px 22.4px;background:var(--color-surface);box-shadow:inset 1px 0 0 var(--color-neutral-300)">
+                <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-ink)">Promedio diario</span>
+                <sc-for list="{{ selAvgs }}" as="t" hint-placeholder-count="2">
+                  <span style="font-family:var(--font-heading);font-size:20px;font-variant-numeric:tabular-nums">{{ t.amountFmt }}</span>
+                </sc-for>
+                <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">{{ selDaysLabel }}</span>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:5.6px">
+              <sc-for list="{{ selList }}" as="e" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:11.2px;padding:8.4px 11.2px;border-radius:8px;background:var(--color-surface);box-shadow:var(--shadow-sm)">
+                  <span style="font-size:12px;white-space:nowrap;color:color-mix(in srgb, var(--color-text) 55%, transparent);min-width:52px">{{ e.dateFmt }}</span>
+                  <div style="display:flex;align-items:center;gap:5.6px;flex-wrap:wrap;margin-right:auto">
+                    <span style="font-size:14px">{{ e.description }}</span>
+                    <sc-if value="{{ e.auto }}" hint-placeholder-val="{{ false }}">
+                      <span class="tag tag-neutral">auto</span>
+                    </sc-if>
+                    <sc-for list="{{ e.tags }}" as="t" hint-placeholder-count="1">
+                      <span class="tag tag-accent">{{ t }}</span>
+                    </sc-for>
+                  </div>
+                  <span style="font-variant-numeric:tabular-nums;white-space:nowrap">{{ e.amountFmt }}</span>
+                </div>
+              </sc-for>
+              <sc-if value="{{ selEmpty }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;font-size:13px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Ningún gasto entra en la selección actual.</p>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ gDias }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:16.8px">
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="4">
+            <section style="display:flex;flex-direction:column;gap:5.6px">
+              <header style="display:flex;align-items:baseline;gap:11.2px;padding-bottom:5.6px;box-shadow:inset 0 -1px 0 var(--color-neutral-300)">
+                <span style="font-family:var(--font-heading);font-size:25px;line-height:1;font-variant-numeric:tabular-nums;color:{{ d.dayColor }}">{{ d.dayNum }}</span>
+                <div style="display:flex;flex-direction:column;gap:0;margin-right:auto">
+                  <span style="font-size:12px">{{ d.weekday }}</span>
+                  <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">{{ d.monthLabel }} · {{ d.countLabel }}</span>
+                </div>
+                <span style="font-family:var(--font-heading);font-size:16px;font-variant-numeric:tabular-nums">{{ d.totalFmt }}</span>
+              </header>
+              <sc-for list="{{ d.items }}" as="e" hint-placeholder-count="2">
+                <div style="display:flex;align-items:center;gap:11.2px;padding:8.4px 8.4px 8.4px 11.2px;border-radius:8px;background:var(--color-surface);box-shadow:var(--shadow-sm)" style-hover="background:var(--color-hover)">
+                  <div style="display:flex;flex-direction:column;gap:2px;min-width:0;margin-right:auto">
+                    <div style="display:flex;align-items:center;gap:5.6px;flex-wrap:wrap">
+                      <span style="font-size:14px">{{ e.description }}</span>
+                      <sc-if value="{{ e.auto }}" hint-placeholder-val="{{ false }}">
+                        <span class="tag tag-neutral" title="Ocurrencia generada por un gasto recurrente">auto</span>
+                      </sc-if>
+                      <sc-for list="{{ e.tags }}" as="t" hint-placeholder-count="1">
+                        <span class="tag tag-accent">{{ t }}</span>
+                      </sc-for>
+                    </div>
+                    <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">{{ e.paymentLabel }}</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end;white-space:nowrap">
+                    <span style="font-variant-numeric:tabular-nums">{{ e.amountFmt }}</span>
+                    <sc-if value="{{ e.showSettle }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent);font-variant-numeric:tabular-nums">liq. {{ e.settleFmt }}</span>
+                    </sc-if>
+                  </div>
+                  <div style="display:flex;gap:2.8px">
+                    <sc-if value="{{ e.manual }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex;gap:2.8px">
+                        <button class="btn btn-secondary btn-icon" title="Editar" onClick="{{ e.onEdit }}"><i class="ph ph-pencil-simple"></i></button>
+                        <button class="btn btn-secondary btn-icon" title="Eliminar" onClick="{{ e.onDelete }}"><i class="ph ph-trash"></i></button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ e.auto }}" hint-placeholder-val="{{ false }}">
+                      <button class="btn btn-ghost" onClick="{{ e.onGoRec }}" style="font-size:12px">Ver recurrente</button>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </section>
+          </sc-for>
+        </div>
+        <p style="font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent);max-width:60ch">Las ocurrencias generadas por un recurrente no se editan acá: se cambia el precio o se cancela el recurrente que las produce.</p>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ vRecurrentes }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16.8px">
+        <header style="display:flex;align-items:flex-end;gap:16.8px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:2.8px;margin-right:auto">
+            <h2 style="margin:0">Gastos recurrentes</h2>
+            <sc-if value="{{ hints }}" hint-placeholder-val="{{ true }}">
+              <code style="font-size:11px;color:color-mix(in srgb, var(--color-text) 45%, transparent)">GET /api/recurring-expenses · orden alfabético</code>
+            </sc-if>
+          </div>
+          <button class="btn btn-primary" onClick="{{ openNewRec }}"><i class="ph ph-plus"></i>Nuevo recurrente</button>
+        </header>
+
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:22.4px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:8.4px;min-width:0">
+            <sc-for list="{{ recurring }}" as="r" hint-placeholder-count="4">
+              <button onClick="{{ r.onSelect }}" class="card" style="text-align:left;border:0;cursor:pointer;box-shadow:{{ r.shadow }};gap:5.6px" style-hover="background:var(--color-hover)">
+                <div style="display:flex;align-items:center;gap:8.4px">
+                  <span class="card-title" style="margin-right:auto">{{ r.name }}</span>
+                  <sc-if value="{{ r.cancelled }}" hint-placeholder-val="{{ false }}">
+                    <span class="tag tag-neutral">Cancelado</span>
+                  </sc-if>
+                </div>
+                <span style="font-variant-numeric:tabular-nums;font-size:14px;color:color-mix(in srgb, var(--color-text) 75%, transparent)">{{ r.ruleFmt }}</span>
+                <div class="card-meta">{{ r.metaLabel }}</div>
+              </button>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{ selRec }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:16.8px;min-width:0;padding:16.8px;border-radius:14px;box-shadow:var(--shadow-md);background:var(--color-surface)">
+              <div style="display:flex;flex-direction:column;gap:2.8px">
+                <h3 style="margin:0">{{ selRec.name }}</h3>
+                <span style="font-size:13px;color:color-mix(in srgb, var(--color-text) 60%, transparent)">{{ selRec.description }}</span>
+                <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:5.6px">
+                  <sc-for list="{{ selRec.tags }}" as="t" hint-placeholder-count="1">
+                    <span class="tag tag-accent">{{ t }}</span>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:8.4px">
+                <h6 style="margin:0;color:var(--color-accent)">Historial de precios</h6>
+                <div style="display:flex;flex-direction:column;gap:0">
+                  <sc-for list="{{ selRec.rules }}" as="ru" hint-placeholder-count="2">
+                    <div style="display:flex;gap:11.2px;align-items:flex-start;padding:8.4px 0;box-shadow:inset 0 -1px 0 var(--color-neutral-300)">
+                      <span style="width:7px;height:7px;flex:none;margin-top:7px;border-radius:50%;background:{{ ru.dot }}"></span>
+                      <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+                        <span style="font-variant-numeric:tabular-nums">{{ ru.amountFmt }}</span>
+                        <span style="font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">{{ ru.rangeLabel }}</span>
+                      </div>
+                      <span style="margin-left:auto;font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent);white-space:nowrap">{{ ru.paymentLabel }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <sc-if value="{{ selRec.active }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;gap:8.4px;flex-wrap:wrap">
+                  <button class="btn btn-primary" onClick="{{ openPrice }}">Cambiar precio</button>
+                  <button class="btn btn-secondary" onClick="{{ cancelRec }}">Cancelar</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ selRec.cancelled }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Cancelado: ya no genera ocurrencias. La del mes en curso se conserva.</p>
+              </sc-if>
+              <sc-if value="{{ hints }}" hint-placeholder-val="{{ true }}">
+                <code style="font-size:11px;color:color-mix(in srgb, var(--color-text) 40%, transparent)">{{ selRec.endpoint }}</code>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ vPresupuesto }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:22.4px;max-width:900px">
+        <header style="display:flex;flex-direction:column;gap:2.8px">
+          <h2 style="margin:0">Presupuesto</h2>
+          <sc-if value="{{ hints }}" hint-placeholder-val="{{ true }}">
+            <code style="font-size:11px;color:color-mix(in srgb, var(--color-text) 45%, transparent)">POST /api/budgets · mes actual o próximo</code>
+          </sc-if>
+        </header>
+
+        <sc-if value="{{ hasBudget }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-md)">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8.4px;padding:22.4px;background:var(--color-band);color:var(--color-band-ink)">
+              <svg viewBox="0 0 140 140" style="width:150px;height:150px">
+                <circle cx="70" cy="70" r="54" fill="none" stroke-width="14" style="stroke:var(--color-band-deep)"></circle>
+                <circle cx="70" cy="70" r="54" fill="none" stroke-width="14" stroke-linecap="round" stroke-dasharray="{{ gaugeDash }}" transform="rotate(-90 70 70)" style="stroke:var(--color-band-dim)"></circle>
+                <text x="70" y="66" text-anchor="middle" style="fill:var(--color-band-ink);font-family:var(--font-heading);font-size:30px">{{ spentPct }}%</text>
+                <text x="70" y="86" text-anchor="middle" style="fill:var(--color-band-dim);font-size:11px;letter-spacing:0.08em">CONSUMIDO</text>
+              </svg>
+              <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-band-dim)">{{ bMonth }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16.8px;padding:22.4px;background:var(--color-surface)">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:11.2px">
+                <div style="display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Total</span>
+                  <span style="font-family:var(--font-heading);font-size:22px;font-variant-numeric:tabular-nums">{{ bTotal }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Disponible</span>
+                  <span style="font-family:var(--font-heading);font-size:22px;font-variant-numeric:tabular-nums;color:{{ remColor }}">{{ bRemaining }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:1px">
+                  <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Por día</span>
+                  <span style="font-family:var(--font-heading);font-size:22px;font-variant-numeric:tabular-nums">{{ bDaily }}</span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5.6px">
+                <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Gasto por día del mes</span>
+                <div style="display:flex;align-items:flex-end;gap:2px;height:52px">
+                  <sc-for list="{{ dailyBars }}" as="d" hint-placeholder-count="30">
+                    <div title="{{ d.title }}" style="flex:1;min-width:2px;border-radius:2px 2px 0 0;background:{{ d.color }};height:{{ d.h }}%"></div>
+                  </sc-for>
+                </div>
+              </div>
+              <p style="margin:0;font-size:12px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Un presupuesto no se edita ni se borra. Se recalcula solo a partir de los gastos del mes.</p>
+            </div>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:11.2px">
+            <h4 style="margin:0">Meses anteriores</h4>
+            <div style="display:flex;flex-direction:column;gap:11.2px">
+              <sc-for list="{{ history }}" as="h" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:88px minmax(0,1fr) 150px;gap:11.2px;align-items:center">
+                  <span style="font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">{{ h.monthLabel }}</span>
+                  <div style="position:relative;height:20px;border-radius:4px;background:var(--color-neutral-200);box-shadow:inset 0 0 0 1px var(--color-neutral-300)">
+                    <div style="position:absolute;inset:0;width:{{ h.pct }}%;border-radius:4px;background:{{ h.color }}"></div>
+                    <div style="position:absolute;top:-3px;bottom:-3px;left:{{ h.budgetPct }}%;width:2px;background:var(--color-neutral-700)"></div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:0;text-align:right">
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ h.spentFmt }}</span>
+                    <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">de {{ h.budgetFmt }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">La línea vertical marca el presupuesto del mes; la barra, lo gastado.</span>
+          </section>
+        </sc-if>
+
+        <div style="display:flex;flex-direction:column;gap:11.2px;padding:16.8px;border-radius:14px;box-shadow:var(--shadow-sm)">
+          <h4 style="margin:0">Presupuesto de octubre 2026</h4>
+          <div style="display:flex;gap:11.2px;flex-wrap:wrap;align-items:flex-end">
+            <div class="field" style="flex:1;min-width:160px">
+              <label>Monto</label>
+              <input class="input" type="text" inputmode="decimal" placeholder="900000" value="{{ budgetAmount }}" onChange="{{ onBudgetAmount }}">
+            </div>
+            <div class="field" style="width:120px">
+              <label>Moneda</label>
+              <select class="input" value="{{ budgetCurrency }}" onChange="{{ onBudgetCurrency }}">
+                <sc-for list="{{ currencies }}" as="c" hint-placeholder-count="3">
+                  <option value="{{ c.code }}">{{ c.code }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <button class="btn btn-primary" onClick="{{ createBudget }}">Crear</button>
+          </div>
+          <sc-if value="{{ budgetMsg }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:12px;color:var(--color-accent-ink)">{{ budgetMsg }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ vCatalogos }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16.8px">
+        <header style="display:flex;flex-direction:column;gap:2.8px">
+          <h2 style="margin:0">Catálogos</h2>
+          <sc-if value="{{ hints }}" hint-placeholder-val="{{ true }}">
+            <code style="font-size:11px;color:color-mix(in srgb, var(--color-text) 45%, transparent)">/api/currencies · /api/tags · /api/payment-methods</code>
+          </sc-if>
+        </header>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16.8px;align-items:start">
+          <section style="display:flex;flex-direction:column;gap:8.4px;padding:16.8px;border-radius:14px;box-shadow:var(--shadow-sm)">
+            <h4 style="margin:0">Monedas</h4>
+            <sc-for list="{{ currencyRows }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:8.4px;padding:5.6px 0;box-shadow:inset 0 -1px 0 var(--color-neutral-300)">
+                <div style="display:flex;flex-direction:column;gap:0;min-width:0;margin-right:auto">
+                  <span style="font-size:14px">{{ c.code }} · escala {{ c.scale }}</span>
+                  <span style="font-size:11px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">{{ c.name }}</span>
+                </div>
+                <sc-if value="{{ c.locked }}" hint-placeholder-val="{{ false }}">
+                  <span class="tag tag-outline" title="Referenciada por un gasto: no se puede borrar ni cambiar la escala">en uso</span>
+                </sc-if>
+                <sc-if value="{{ c.free }}" hint-placeholder-val="{{ false }}">
+                  <button class="btn btn-secondary btn-icon" title="Eliminar" onClick="{{ c.onDelete }}"><i class="ph ph-trash"></i></button>
+                </sc-if>
+              </div>
+            </sc-for>
+            <button class="btn btn-ghost" style="align-self:flex-start"><i class="ph ph-plus"></i>Nueva moneda</button>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:8.4px;padding:16.8px;border-radius:14px;box-shadow:var(--shadow-sm)">
+            <h4 style="margin:0">Tags</h4>
+            <div style="display:flex;gap:5.6px;flex-wrap:wrap">
+              <sc-for list="{{ tagRows }}" as="t" hint-placeholder-count="5">
+                <span class="tag tag-accent" style="gap:6px;padding-right:5px">{{ t.name }}
+                  <button onClick="{{ t.onDelete }}" title="Eliminar" style="border:0;background:transparent;color:inherit;cursor:pointer;display:flex;padding:0 2px;font-size:12px"><i class="ph ph-x"></i></button>
+                </span>
+              </sc-for>
+            </div>
+            <p style="margin:0;font-size:12px;color:color-mix(in srgb, var(--color-text) 50%, transparent)">Borrar un tag nunca falla: se desasocia de los gastos y estos se conservan.</p>
+            <button class="btn btn-ghost" style="align-self:flex-start"><i class="ph ph-plus"></i>Nuevo tag</button>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:8.4px;padding:16.8px;border-radius:14px;box-shadow:var(--shadow-sm)">
+            <h4 style="margin:0">Métodos de pago</h4>
+            <sc-for list="{{ methodRows }}" as="m" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:8.4px;padding:5.6px 0;box-shadow:inset 0 -1px 0 var(--color-neutral-300)">
+                <span style="font-size:14px;margin-right:auto">{{ m.name }}</span>
+                <sc-if value="{{ m.locked }}" hint-placeholder-val="{{ false }}">
+                  <span class="tag tag-outline" title="Usado por un gasto: el borrado devuelve 409">en uso</span>
+                </sc-if>
+                <sc-if value="{{ m.free }}" hint-placeholder-val="{{ false }}">
+                  <button class="btn btn-secondary btn-icon" title="Eliminar" onClick="{{ m.onDelete }}"><i class="ph ph-trash"></i></button>
+                </sc-if>
+              </div>
+            </sc-for>
+            <button class="btn btn-ghost" style="align-self:flex-start"><i class="ph ph-plus"></i>Nuevo método</button>
+          </section>
+        </div>
+      </div>
+    </sc-if>
+    </div>
+    </sc-if>
+  </main>
+
+  <sc-if value="{{ dlgExpense }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop">
+      <div class="dialog" style="width:min(560px,100%)">
+        <span class="dialog-title">{{ dlgTitle }}</span>
+        <sc-if value="{{ isEdit }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:12px;color:var(--color-accent-ink)">PUT reemplaza el gasto completo: los campos que queden vacíos se borran.</p>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:1fr 110px 130px;gap:11.2px">
+          <div class="field">
+            <label>Monto</label>
+            <input class="input" type="text" inputmode="decimal" value="{{ fAmount }}" onChange="{{ onAmount }}">
+          </div>
+          <div class="field">
+            <label>Moneda</label>
+            <select class="input" value="{{ fCurrency }}" onChange="{{ onCurrency }}">
+              <sc-for list="{{ currencies }}" as="c" hint-placeholder-count="3">
+                <option value="{{ c.code }}">{{ c.code }}</option>
+              </sc-for>
+            </select>
+          </div>
+          <div class="field">
+            <label>Fecha</label>
+            <input class="input" type="date" value="{{ fDate }}" onChange="{{ onDate }}">
+          </div>
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <input class="input" type="text" maxlength="500" value="{{ fDesc }}" onChange="{{ onDesc }}">
+        </div>
+        <div class="field">
+          <label>Tags</label>
+          <div style="display:flex;gap:5.6px;flex-wrap:wrap">
+            <sc-for list="{{ tagChips }}" as="t" hint-placeholder-count="5">
+              <button onClick="{{ t.onToggle }}" style="border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};font:inherit;font-size:11px;padding:3px 10px;border-radius:6px;cursor:pointer">{{ t.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="field">
+          <label>Método de pago</label>
+          <select class="input" value="{{ fMethod }}" onChange="{{ onMethod }}">
+            <option value="">— ninguno —</option>
+            <sc-for list="{{ methods }}" as="m" hint-placeholder-count="4">
+              <option value="{{ m.name }}">{{ m.name }}</option>
+            </sc-for>
+          </select>
+        </div>
+        <sc-if value="{{ settlementOn }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:8.4px;padding-top:8.4px;box-shadow:inset 0 1px 0 var(--color-neutral-300)">
+            <label class="radio" style="align-self:flex-start">
+              <input type="checkbox" checked="{{ fSettle }}" onChange="{{ onSettleToggle }}"><span class="dot"></span>
+              Se liquidó en otra moneda
+            </label>
+            <sc-if value="{{ fSettle }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:1fr 110px;gap:11.2px">
+                <div class="field">
+                  <label>Monto liquidado</label>
+                  <input class="input" type="text" inputmode="decimal" value="{{ fSettleAmount }}" onChange="{{ onSettleAmount }}">
+                </div>
+                <div class="field">
+                  <label>Moneda</label>
+                  <select class="input" value="{{ fSettleCurrency }}" onChange="{{ onSettleCurrency }}">
+                    <sc-for list="{{ settleCurrencies }}" as="c" hint-placeholder-count="2">
+                      <option value="{{ c.code }}">{{ c.code }}</option>
+                    </sc-for>
+                  </select>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:8.4px;align-items:flex-start;padding:8.4px 11.2px;border-radius:8px;background:var(--color-chip-bg);box-shadow:inset 0 0 0 1px var(--color-chip-line)">
+            <i class="ph ph-warning-circle" style="color:var(--color-warn);margin-top:2px"></i>
+            <div style="display:flex;flex-direction:column;gap:1px">
+              <span style="font-size:13px;color:var(--color-chip-ink)">{{ formError }}</span>
+              <code style="font-size:10px;color:var(--color-accent-ink)">{{ formStatus }}</code>
+            </div>
+          </div>
+        </sc-if>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" onClick="{{ closeDlg }}">Cancelar</button>
+          <button class="btn btn-primary" onClick="{{ saveExpense }}">Guardar gasto</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgPrice }}" hint-placeholder-val="{{ false }}">
+    <div class="dialog-backdrop">
+      <div class="dialog">
+        <span class="dialog-title">Cambiar precio</span>
+        <p class="dialog-body" style="margin:0">Rige desde el próximo mes. La ocurrencia de septiembre no cambia.</p>
+        <div style="display:grid;grid-template-columns:1fr 110px;gap:11.2px">
+          <div class="field">
+            <label>Nuevo monto</label>
+            <input class="input" type="text" inputmode="decimal" value="{{ pAmount }}" onChange="{{ onPriceAmount }}">
+          </div>
+          <div class="field">
+            <label>Moneda</label>
+            <select class="input" value="{{ pCurrency }}" onChange="{{ onPriceCurrency }}">
+              <sc-for list="{{ currencies }}" as="c" hint-placeholder-count="3">
+                <option value="{{ c.code }}">{{ c.code }}</option>
+              </sc-for>
+            </select>
+          </div>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn btn-secondary" onClick="{{ closeDlg }}">Cancelar</button>
+          <button class="btn btn-primary" onClick="{{ savePrice }}">Aplicar</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;uiState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;datos&quot;,&quot;cargando&quot;,&quot;error&quot;,&quot;vacio&quot;],&quot;default&quot;:&quot;datos&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estados&quot;},&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;resumen&quot;,&quot;gastos&quot;,&quot;recurrentes&quot;,&quot;presupuesto&quot;,&quot;catalogos&quot;],&quot;default&quot;:&quot;resumen&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showApiHints&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Desarrollo&quot;},&quot;showSettlement&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Desarrollo&quot;}}">
+const TODAY = '2026-09-05';
+const MONTH = '2026-09';
+const MONTH_DAYS = 30;
+const MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+
+class Component extends DCLogic {
+  state = {
+    view: null,
+    dlg: null,
+    editId: null,
+    form: null,
+    price: { amount: '', currency: 'USD' },
+    budgetForm: { amount: '', currency: 'ARS' },
+    budgetMsg: '',
+    theme: 'light',
+    gtab: 'dias',
+    selTags: null,
+    recMode: 'incluir',
+    error: null,
+    selId: 7,
+    seq: 100,
+    currencies: [
+      { id: 1, code: 'ARS', name: 'Peso argentino', scale: 2 },
+      { id: 2, code: 'EUR', name: 'Euro', scale: 2 },
+      { id: 3, code: 'USD', name: 'US Dollar', scale: 2 }
+    ],
+    tags: [
+      { id: 1, name: 'comida' }, { id: 2, name: 'hogar' }, { id: 3, name: 'salud' },
+      { id: 4, name: 'streaming' }, { id: 5, name: 'transporte' }
+    ],
+    methods: [
+      { id: 1, name: 'Efectivo' }, { id: 2, name: 'Mercado Pago' },
+      { id: 3, name: 'Tarjeta Visa' }, { id: 4, name: 'Transferencia' }
+    ],
+    budgetHistory: [
+      { month: '2026-04', amount: 700000, spent: 682400, currencyCode: 'ARS' },
+      { month: '2026-05', amount: 700000, spent: 731900, currencyCode: 'ARS' },
+      { month: '2026-06', amount: 760000, spent: 704300, currencyCode: 'ARS' },
+      { month: '2026-07', amount: 800000, spent: 795100, currencyCode: 'ARS' },
+      { month: '2026-08', amount: 800000, spent: 748600, currencyCode: 'ARS' }
+    ],
+    budget: { id: 3, month: MONTH, amount: '850000.00', currencyCode: 'ARS', createdAt: '2026-09-01T03:00:00Z' },
+    expenses: [
+      { id: 51, amount: '18400.00', currencyCode: 'ARS', expenseDate: '2026-09-05', description: 'Supermercado', tags: ['comida', 'hogar'], paymentMethod: 'Tarjeta Visa', settlementAmount: null, settlementCurrencyCode: null, recurringExpenseId: null },
+      { id: 50, amount: '6200.00', currencyCode: 'ARS', expenseDate: '2026-09-04', description: 'Subte y colectivo', tags: ['transporte'], paymentMethod: 'Mercado Pago', settlementAmount: null, settlementCurrencyCode: null, recurringExpenseId: null },
+      { id: 49, amount: '15.99', currencyCode: 'USD', expenseDate: '2026-09-03', description: 'Netflix', tags: ['streaming'], paymentMethod: 'Tarjeta Visa', settlementAmount: '21200.00', settlementCurrencyCode: 'ARS', recurringExpenseId: 7 },
+      { id: 48, amount: '32000.00', currencyCode: 'ARS', expenseDate: '2026-09-02', description: 'Farmacia', tags: ['salud'], paymentMethod: 'Efectivo', settlementAmount: null, settlementCurrencyCode: null, recurringExpenseId: null },
+      { id: 47, amount: '480000.00', currencyCode: 'ARS', expenseDate: '2026-09-01', description: 'Alquiler', tags: ['hogar'], paymentMethod: 'Transferencia', settlementAmount: null, settlementCurrencyCode: null, recurringExpenseId: 3 },
+      { id: 46, amount: '9800.00', currencyCode: 'ARS', expenseDate: '2026-09-01', description: 'Verdulería', tags: ['comida'], paymentMethod: 'Efectivo', settlementAmount: null, settlementCurrencyCode: null, recurringExpenseId: null }
+    ],
+    recurring: [
+      { id: 3, name: 'Alquiler', description: 'Depto Almagro', tags: ['hogar'], createdAt: '2026-01-05T12:00:00Z',
+        ruleHistory: [
+          { id: 1, amount: '420000.00', currencyCode: 'ARS', paymentMethod: 'Transferencia', startMonth: '2026-01-01', endMonth: '2026-07-01' },
+          { id: 2, amount: '480000.00', currencyCode: 'ARS', paymentMethod: 'Transferencia', startMonth: '2026-07-01', endMonth: null }
+        ] },
+      { id: 9, name: 'Gimnasio', description: 'Plan mensual', tags: ['salud'], createdAt: '2025-11-01T12:00:00Z',
+        ruleHistory: [
+          { id: 8, amount: '38000.00', currencyCode: 'ARS', paymentMethod: 'Efectivo', startMonth: '2025-11-01', endMonth: '2026-08-01' }
+        ] },
+      { id: 7, name: 'Netflix', description: 'Plan familiar', tags: ['streaming'], createdAt: '2026-01-01T10:00:00Z',
+        ruleHistory: [
+          { id: 4, amount: '12.99', currencyCode: 'USD', paymentMethod: 'Tarjeta Visa', startMonth: '2026-01-01', endMonth: '2026-06-01' },
+          { id: 5, amount: '15.99', currencyCode: 'USD', paymentMethod: 'Tarjeta Visa', startMonth: '2026-06-01', endMonth: null }
+        ] }
+    ]
+  };
+
+  componentDidMount() {
+    document.addEventListener('ex-state', e => this.setState({ ui: e.detail }));
+  }
+  view() { return this.state.view || this.props.defaultView || 'resumen'; }
+  scaleOf(code) { const c = this.state.currencies.find(x => x.code === code); return c ? c.scale : 2; }
+  fmt(amount, code) {
+    const s = this.scaleOf(code);
+    const n = Number(amount || 0);
+    return n.toLocaleString('es-AR', { minimumFractionDigits: s, maximumFractionDigits: s }) + ' ' + code;
+  }
+  dateFmt(d) { const p = d.split('-'); return Number(p[2]) + ' ' + MES[Number(p[1]) - 1]; }
+  monthFmt(d) { const p = d.split('-'); return MES[Number(p[1]) - 1] + ' ' + p[0]; }
+  open(rule) { return rule && rule.endMonth === null; }
+  currentRule(r) { return r.ruleHistory.find(x => x.endMonth === null) || null; }
+
+  go(v) { return () => this.setState({ view: v, dlg: null }); }
+
+  blankForm() {
+    return { amount: '', currencyCode: 'ARS', expenseDate: TODAY, description: '', tagNames: [],
+      paymentMethodName: '', settle: false, settlementAmount: '', settlementCurrencyCode: 'USD' };
+  }
+  setForm(patch) { this.setState(s => ({ form: Object.assign({}, s.form, patch), error: null })); }
+
+  saveExpense = () => {
+    const f = this.state.form;
+    const n = Number(f.amount);
+    if (!f.amount || isNaN(n) || n <= 0) { this.setState({ error: { detail: 'amount must be a positive amount', status: '400 Bad Request' } }); return; }
+    const dec = (f.amount.split('.')[1] || '').length;
+    if (dec > this.scaleOf(f.currencyCode)) { this.setState({ error: { detail: 'amount exceeds the scale of ' + f.currencyCode, status: '400 Bad Request' } }); return; }
+    if (f.settle && (!f.settlementAmount || Number(f.settlementAmount) <= 0)) { this.setState({ error: { detail: 'settlementAmount and settlementCurrencyCode must be sent together', status: '400 Bad Request' } }); return; }
+    const scale = this.scaleOf(f.currencyCode);
+    const rec = {
+      amount: n.toFixed(scale),
+      currencyCode: f.currencyCode,
+      expenseDate: f.expenseDate || TODAY,
+      description: f.description || '(sin descripción)',
+      tags: f.tagNames.slice().sort(),
+      paymentMethod: f.paymentMethodName || null,
+      settlementAmount: f.settle ? Number(f.settlementAmount).toFixed(this.scaleOf(f.settlementCurrencyCode)) : null,
+      settlementCurrencyCode: f.settle ? f.settlementCurrencyCode : null,
+      recurringExpenseId: null
+    };
+    this.setState(s => {
+      if (s.editId) {
+        return { expenses: s.expenses.map(e => e.id === s.editId ? Object.assign({}, e, rec) : e), dlg: null, editId: null, form: null, error: null };
+      }
+      const id = s.seq + 1;
+      const list = s.expenses.concat([Object.assign({ id: id }, rec)]);
+      list.sort((a, b) => a.expenseDate === b.expenseDate ? b.id - a.id : (a.expenseDate < b.expenseDate ? 1 : -1));
+      return { expenses: list, seq: id, dlg: null, form: null, error: null };
+    });
+  };
+
+  savePrice = () => {
+    const p = this.state.price;
+    const n = Number(p.amount);
+    if (!n || n <= 0) return;
+    const id = this.state.selId;
+    this.setState(s => ({
+      dlg: null,
+      recurring: s.recurring.map(r => {
+        if (r.id !== id) return r;
+        const hist = r.ruleHistory.map(x => x.endMonth === null ? Object.assign({}, x, { endMonth: '2026-10-01' }) : x);
+        const cur = this.currentRule(r);
+        hist.push({ id: s.seq + 20, amount: n.toFixed(this.scaleOf(p.currency)), currencyCode: p.currency,
+          paymentMethod: cur ? cur.paymentMethod : null, startMonth: '2026-10-01', endMonth: null });
+        return Object.assign({}, r, { ruleHistory: hist });
+      })
+    }));
+  };
+
+  renderVals() {
+    const s = this.state;
+    const v = this.view();
+    const hints = this.props.showApiHints !== false;
+    const showSettle = this.props.showSettlement !== false;
+    const navColor = k => v === k ? 'var(--color-accent)' : 'var(--color-text)';
+
+    const spentByCur = {};
+    s.expenses.forEach(e => { spentByCur[e.currencyCode] = (spentByCur[e.currencyCode] || 0) + Number(e.amount); });
+
+    const b = s.budget;
+    let bVals = {};
+    if (b) {
+      const total = Number(b.amount);
+      const spent = spentByCur[b.currencyCode] || 0;
+      const remaining = total - spent;
+      const daysLeft = MONTH_DAYS - Number(TODAY.split('-')[2]) + 1;
+      bVals = {
+        bMonth: this.monthFmt(b.month + '-01'),
+        bCurrency: b.currencyCode,
+        bTotal: this.fmt(b.amount, b.currencyCode),
+        bRemaining: this.fmt(remaining.toFixed(2), b.currencyCode),
+        bDaily: this.fmt((remaining / daysLeft).toFixed(2), b.currencyCode),
+        remColor: remaining < 0 ? 'var(--color-warn)' : 'var(--color-text)',
+        spentPct: Math.max(0, Math.min(100, (spent / total) * 100)).toFixed(1),
+        spentLabel: 'Gastado ' + this.fmt(spent.toFixed(2), b.currencyCode),
+        daysLabel: daysLeft + ' días restantes, hoy incluido',
+        daysCount: daysLeft,
+        remColorLight: remaining < 0 ? 'var(--color-warn-on-band)' : 'var(--color-band-ink)'
+      };
+
+      const today = Number(TODAY.split('-')[2]);
+      const ideal = (spent / today) * MONTH_DAYS;
+      bVals.paceLabel = spent / today > total / MONTH_DAYS ? 'alto' : 'en línea';
+
+      const daily = new Array(MONTH_DAYS + 1).fill(0);
+      s.expenses.forEach(e => {
+        if (e.currencyCode !== b.currencyCode) return;
+        daily[Number(e.expenseDate.split('-')[2])] += Number(e.amount);
+      });
+      const W = 600, H = 168, TOP = 8, BOT = 22;
+      const max = Math.max(total, spent, 1) * 1.06;
+      const X = d => ((d - 1) / (MONTH_DAYS - 1)) * W;
+      const Y = val => H - BOT - (val / max) * (H - TOP - BOT);
+      let cum = 0;
+      const pts = [];
+      for (let d = 1; d <= today; d++) { cum += daily[d]; pts.push([X(d), Y(cum)]); }
+      const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+      const last = pts[pts.length - 1] || [0, Y(0)];
+      bVals.chartLine = line;
+      bVals.chartArea = line + ' L' + last[0].toFixed(1) + ' ' + (H - BOT) + ' L0 ' + (H - BOT) + ' Z';
+      bVals.chartIdeal = 'M0 ' + Y(0).toFixed(1) + ' L' + W + ' ' + Y(total).toFixed(1);
+      bVals.chartDotX = last[0].toFixed(1);
+      bVals.chartDotY = last[1].toFixed(1);
+      bVals.chartProj = 'M' + last[0].toFixed(1) + ' ' + last[1].toFixed(1) +
+        ' L' + W + ' ' + Y(Math.min(ideal, max)).toFixed(1);
+      bVals.chartTodayX = last[0].toFixed(1);
+      bVals.chartBase = (H - BOT).toFixed(0);
+      bVals.chartLabels = ['1 sep', '10 sep', '20 sep', '30 sep'];
+
+      const circ = 2 * Math.PI * 54;
+      const pctNum = Math.max(0, Math.min(100, (spent / total) * 100));
+      bVals.gaugeDash = (circ * pctNum / 100).toFixed(1) + ' ' + circ.toFixed(1);
+
+      const dayMax = Math.max.apply(null, daily.slice(1).concat([1]));
+      bVals.dailyBars = daily.slice(1).map((v, i) => ({
+        h: v > 0 ? Math.max(4, (v / dayMax) * 100).toFixed(1) : 2,
+        color: v > 0 ? (i + 1 === today ? 'var(--color-accent)' : 'var(--color-accent-400)') : 'var(--color-neutral-300)',
+        title: (i + 1) + ' sep · ' + this.fmt(v.toFixed(2), b.currencyCode)
+      }));
+
+      const histMax = Math.max.apply(null, s.budgetHistory.map(h => Math.max(h.amount, h.spent)));
+      bVals.history = s.budgetHistory.map(h => ({
+        monthLabel: this.monthFmt(h.month + '-01'),
+        pct: ((h.spent / histMax) * 100).toFixed(1),
+        budgetPct: ((h.amount / histMax) * 100).toFixed(1),
+        color: h.spent > h.amount ? 'var(--color-warn)' : 'var(--color-accent-600)',
+        spentFmt: this.fmt(h.spent.toFixed(2), h.currencyCode),
+        budgetFmt: this.fmt(h.amount.toFixed(2), h.currencyCode)
+      }));
+    }
+
+    const tagTotals = {};
+    s.expenses.forEach(e => {
+      if (b && e.currencyCode !== b.currencyCode) return;
+      const names = e.tags.length ? e.tags : ['sin tag'];
+      names.forEach(n => { tagTotals[n] = (tagTotals[n] || 0) + Number(e.amount) / names.length; });
+    });
+    const tagMax = Math.max.apply(null, Object.keys(tagTotals).map(k => tagTotals[k]).concat([1]));
+    const barSteps = ['var(--color-accent-700)', 'var(--color-accent-600)', 'var(--color-accent-500)', 'var(--color-accent-400)', 'var(--color-accent-300)'];
+    const byTag = Object.keys(tagTotals)
+      .sort((a, c) => tagTotals[c] - tagTotals[a])
+      .map((n, i) => ({
+        name: n,
+        amountFmt: this.fmt(tagTotals[n].toFixed(2), b ? b.currencyCode : s.currencies[0].code),
+        pct: ((tagTotals[n] / tagMax) * 100).toFixed(1),
+        color: barSteps[Math.min(i, barSteps.length - 1)]
+      }));
+
+    const expRow = e => {
+      const auto = e.recurringExpenseId !== null;
+      return {
+        id: e.id, tags: e.tags, auto: auto, manual: !auto,
+        dateFmt: this.dateFmt(e.expenseDate),
+        description: e.description,
+        paymentLabel: e.paymentMethod || '—',
+        amountFmt: this.fmt(e.amount, e.currencyCode),
+        showSettle: showSettle && !!e.settlementAmount,
+        settleFmt: e.settlementAmount ? this.fmt(e.settlementAmount, e.settlementCurrencyCode) : '',
+        onEdit: () => this.setState({ dlg: 'expense', editId: e.id, error: null, form: {
+          amount: e.amount, currencyCode: e.currencyCode, expenseDate: e.expenseDate,
+          description: e.description, tagNames: e.tags.slice(), paymentMethodName: e.paymentMethod || '',
+          settle: !!e.settlementAmount, settlementAmount: e.settlementAmount || '',
+          settlementCurrencyCode: e.settlementCurrencyCode || 'USD' } }),
+        onDelete: () => this.setState(st => ({ expenses: st.expenses.filter(x => x.id !== e.id) })),
+        onGoRec: () => this.setState({ view: 'recurrentes', selId: e.recurringExpenseId })
+      };
+    };
+
+    const recRow = r => {
+      const cur = this.currentRule(r);
+      return {
+        id: r.id, name: r.name, cancelled: !cur, active: !!cur,
+        ruleFmt: cur ? this.fmt(cur.amount, cur.currencyCode) + ' / mes' : 'sin regla activa',
+        metaLabel: r.tags.join(' · ') + ' · desde ' + this.monthFmt(r.ruleHistory[0].startMonth),
+        shadow: r.id === s.selId ? '0 0 0 1px var(--color-accent)' : 'var(--shadow-sm)',
+        onSelect: () => this.setState({ selId: r.id })
+      };
+    };
+
+    const sel = s.recurring.find(r => r.id === s.selId);
+    let selRec = null;
+    if (sel) {
+      const cur = this.currentRule(sel);
+      selRec = {
+        name: sel.name, description: sel.description || '—', tags: sel.tags,
+        active: !!cur, cancelled: !cur,
+        endpoint: 'GET /api/recurring-expenses/' + sel.id,
+        rules: sel.ruleHistory.slice().reverse().map(ru => ({
+          amountFmt: this.fmt(ru.amount, ru.currencyCode),
+          paymentLabel: ru.paymentMethod || '—',
+          dot: ru.endMonth === null ? 'var(--color-accent)' : 'var(--color-neutral-400)',
+          rangeLabel: ru.endMonth === null
+            ? 'desde ' + this.monthFmt(ru.startMonth) + ' · vigente'
+            : this.monthFmt(ru.startMonth) + ' → ' + this.monthFmt(ru.endMonth)
+        }))
+      };
+    }
+
+    const usedCur = {};
+    const usedMethod = {};
+    s.expenses.forEach(e => {
+      usedCur[e.currencyCode] = true;
+      if (e.settlementCurrencyCode) usedCur[e.settlementCurrencyCode] = true;
+      if (e.paymentMethod) usedMethod[e.paymentMethod] = true;
+    });
+
+    const f = s.form || this.blankForm();
+
+    const ui = this.props.uiState || 'datos';
+    const scope = {
+      resumen: 'el resumen del mes', gastos: 'tus gastos', recurrentes: 'tus gastos recurrentes',
+      presupuesto: 'el presupuesto', catalogos: 'tus catálogos'
+    };
+    const empty = {
+      resumen: { title: 'Todavía no hay nada este mes', body: 'Cuando cargues tu primer gasto o definas un presupuesto, acá vas a ver el disponible, el ritmo de gasto y a dónde se va la plata.', action: 'Cargar un gasto', onAction: () => this.setState({ view: 'gastos', dlg: 'expense', editId: null, form: this.blankForm() }) },
+      gastos: { title: 'Sin gastos en septiembre', body: 'Cargá un gasto manual o definí un recurrente para que la app genere la ocurrencia de cada mes automáticamente.', action: 'Nuevo gasto', onAction: () => this.setState({ dlg: 'expense', editId: null, form: this.blankForm() }) },
+      recurrentes: { title: 'Sin gastos recurrentes', body: 'Los recurrentes son cosas como el alquiler o una suscripción: se definen una vez y generan su gasto cada mes, con historial de cambios de precio.', action: 'Nuevo recurrente', onAction: () => this.setState({ view: 'recurrentes' }) },
+      presupuesto: { title: 'Sin presupuesto para este mes', body: 'Definí cuánto querés gastar en septiembre y la app calcula el disponible y cuánto te queda por día. Una vez creado no se edita.', action: 'Crear presupuesto', onAction: () => this.setState({ view: 'presupuesto' }) },
+      catalogos: { title: 'Catálogos vacíos', body: 'Antes de cargar gastos necesitás al menos una moneda. Los tags y los métodos de pago son opcionales y se pueden crear al vuelo desde el formulario de gasto.', action: 'Nueva moneda', onAction: () => this.setState({ view: 'catalogos' }) }
+    };
+
+    const chipNames = s.tags.map(t => t.name).concat(['sin tag']);
+    const selected = s.selTags === null ? chipNames.slice() : s.selTags;
+    const elapsedDays = Number(TODAY.split('-')[2]);
+    const filtered = s.expenses.filter(e => {
+      const auto = e.recurringExpenseId !== null;
+      if (s.recMode === 'excluir' && auto) return false;
+      if (s.recMode === 'solo' && !auto) return false;
+      const names = e.tags.length ? e.tags : ['sin tag'];
+      return names.some(n => selected.indexOf(n) >= 0);
+    });
+    const selByCur = {};
+    filtered.forEach(e => { selByCur[e.currencyCode] = (selByCur[e.currencyCode] || 0) + Number(e.amount); });
+    const sumRows = Object.keys(selByCur).sort().map(c => ({ amountFmt: this.fmt(selByCur[c].toFixed(2), c) }));
+    const avgRows = Object.keys(selByCur).sort().map(c => ({ amountFmt: this.fmt((selByCur[c] / elapsedDays).toFixed(2), c) }));
+
+    return Object.assign({
+      hints: hints,
+      vResumen: v === 'resumen', vGastos: v === 'gastos', vRecurrentes: v === 'recurrentes',
+      vPresupuesto: v === 'presupuesto', vCatalogos: v === 'catalogos',
+      navResumen: navColor('resumen'), navGastos: navColor('gastos'),
+      navRecurrentes: navColor('recurrentes'), navPresupuesto: navColor('presupuesto'),
+      navCatalogos: navColor('catalogos'),
+      goResumen: this.go('resumen'), goGastos: this.go('gastos'),
+      goRecurrentes: this.go('recurrentes'), goPresupuesto: this.go('presupuesto'),
+      goCatalogos: this.go('catalogos'),
+
+      hasBudget: !!b, noBudget: !b, byTag: byTag,
+      totals: Object.keys(spentByCur).sort().map(code => ({ code: code, amountFmt: this.fmt(spentByCur[code].toFixed(2), code) })),
+
+      expenses: s.expenses.map(expRow),
+      days: (() => {
+        const order = [];
+        const groups = {};
+        s.expenses.forEach(e => {
+          if (!groups[e.expenseDate]) { groups[e.expenseDate] = []; order.push(e.expenseDate); }
+          groups[e.expenseDate].push(e);
+        });
+        return order.map(date => {
+          const list = groups[date];
+          const per = {};
+          list.forEach(e => { per[e.currencyCode] = (per[e.currencyCode] || 0) + Number(e.amount); });
+          const p = date.split('-');
+          const wd = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'][new Date(date + 'T12:00:00Z').getUTCDay()];
+          return {
+            date: date,
+            dayNum: p[2],
+            weekday: date === TODAY ? 'hoy · ' + wd : wd,
+            isToday: date === TODAY,
+            dayColor: date === TODAY ? 'var(--color-accent)' : 'color-mix(in srgb, var(--color-text) 55%, transparent)',
+            monthLabel: MES[Number(p[1]) - 1],
+            totalFmt: Object.keys(per).sort().map(c => this.fmt(per[c].toFixed(2), c)).join('  ·  '),
+            countLabel: list.length === 1 ? '1 gasto' : list.length + ' gastos',
+            items: list.map(expRow)
+          };
+        });
+      })(),
+      recent: s.expenses.slice(0, 5).map(expRow),
+      recurring: s.recurring.map(recRow),
+      activeRec: s.recurring.filter(r => this.currentRule(r)).map(recRow),
+      selRec: selRec,
+
+      currencies: s.currencies,
+      settleCurrencies: s.currencies.filter(c => c.code !== f.currencyCode),
+      methods: s.methods,
+      currencyRows: s.currencies.map(c => ({
+        code: c.code, name: c.name, scale: c.scale,
+        locked: !!usedCur[c.code], free: !usedCur[c.code],
+        onDelete: () => this.setState(st => ({ currencies: st.currencies.filter(x => x.id !== c.id) }))
+      })),
+      tagRows: s.tags.map(t => ({
+        name: t.name,
+        onDelete: () => this.setState(st => ({
+          tags: st.tags.filter(x => x.id !== t.id),
+          expenses: st.expenses.map(e => Object.assign({}, e, { tags: e.tags.filter(n => n !== t.name) }))
+        }))
+      })),
+      methodRows: s.methods.map(m => ({
+        name: m.name, locked: !!usedMethod[m.name], free: !usedMethod[m.name],
+        onDelete: () => this.setState(st => ({ methods: st.methods.filter(x => x.id !== m.id) }))
+      })),
+
+      showData: ui === 'datos', showLoading: ui === 'cargando',
+      showError: ui === 'error', showEmpty: ui === 'vacio',
+      stateScope: scope[v],
+      errorDetail: v === 'presupuesto' ? 'a budget already exists for 2026-09' : 'Connection refused: no se pudo alcanzar el servidor en localhost:8080',
+      errorStatus: v === 'presupuesto' ? '409 Conflict' : 'Error de red',
+      retry: () => this.setState({ view: v }),
+      emptyTitle: empty[v].title,
+      emptyBody: empty[v].body,
+      emptyActionLabel: empty[v].action,
+      emptyAction: empty[v].onAction,
+      skeletonBars: [58, 34, 72, 46, 88, 30, 64, 41, 76, 52, 68, 38].map((h, i) => ({ h: h, delay: (i * 0.05).toFixed(2) + 's' })),
+      skeletonRows: [64, 48, 72, 40, 56, 68].map((w, i) => ({ w: w, delay: (i * 0.08).toFixed(2) + 's' })),
+      themeClass: s.theme === 'dark' ? 'theme-dark' : 'theme-light',
+      themeIcon: s.theme === 'dark' ? 'ph-moon' : 'ph-sun',
+      isDark: s.theme === 'dark',
+      trackBg: s.theme === 'dark' ? 'var(--color-chip-bg)' : 'transparent',
+      knobX: s.theme === 'dark' ? '16px' : '0px',
+      themeLabel: s.theme === 'dark' ? 'Modo oscuro' : 'Modo claro',
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'dark' ? 'light' : 'dark' })),
+      gDias: s.gtab === 'dias', gAnalisis: s.gtab === 'analisis',
+      goDias: () => this.setState({ gtab: 'dias' }),
+      goAnalisis: () => this.setState({ gtab: 'analisis' }),
+      recIncluir: s.recMode === 'incluir', recExcluir: s.recMode === 'excluir', recSolo: s.recMode === 'solo',
+      setRecIncluir: () => this.setState({ recMode: 'incluir' }),
+      setRecExcluir: () => this.setState({ recMode: 'excluir' }),
+      setRecSolo: () => this.setState({ recMode: 'solo' }),
+      selAllTags: () => this.setState({ selTags: null }),
+      clearTags: () => this.setState({ selTags: [] }),
+      filterChips: chipNames.map(n => {
+        const on = selected.indexOf(n) >= 0;
+        return {
+          name: n,
+          bg: on ? 'var(--color-chip-bg)' : 'transparent',
+          border: on ? 'var(--color-accent)' : 'var(--color-divider)',
+          color: on ? 'var(--color-chip-ink)' : 'var(--color-text)',
+          onToggle: () => this.setState({ selTags: on ? selected.filter(x => x !== n) : selected.concat([n]) })
+        };
+      }),
+      selCount: filtered.length,
+      selEmpty: filtered.length === 0,
+      selList: filtered.map(expRow),
+      selSums: sumRows.length ? sumRows : [{ amountFmt: '—' }],
+      selAvgs: avgRows.length ? avgRows : [{ amountFmt: '—' }],
+      selDaysLabel: 'sobre ' + elapsedDays + ' días transcurridos',
+      selScopeLabel: (selected.length === chipNames.length ? 'todos los tags' : selected.length + ' de ' + chipNames.length + ' tags') +
+        ' · ' + (s.recMode === 'incluir' ? 'con recurrentes' : s.recMode === 'excluir' ? 'sin recurrentes' : 'sólo recurrentes'),
+
+      dlgExpense: s.dlg === 'expense', dlgPrice: s.dlg === 'price',
+      dlgTitle: s.editId ? 'Editar gasto' : 'Nuevo gasto',
+      isEdit: !!s.editId,
+      settlementOn: showSettle,
+      openNew: () => this.setState({ dlg: 'expense', editId: null, error: null, form: this.blankForm() }),
+      openNewRec: () => this.setState({ view: 'recurrentes' }),
+      openPrice: () => this.setState(st => ({ dlg: 'price', price: { amount: '', currency: (this.currentRule(st.recurring.find(r => r.id === st.selId)) || {}).currencyCode || 'ARS' } })),
+      cancelRec: () => this.setState(st => ({
+        recurring: st.recurring.map(r => r.id === st.selId
+          ? Object.assign({}, r, { ruleHistory: r.ruleHistory.map(x => x.endMonth === null ? Object.assign({}, x, { endMonth: '2026-10-01' }) : x) })
+          : r)
+      })),
+      closeDlg: () => this.setState({ dlg: null, editId: null, error: null }),
+      saveExpense: this.saveExpense,
+      savePrice: this.savePrice,
+
+      fAmount: f.amount, fCurrency: f.currencyCode, fDate: f.expenseDate, fDesc: f.description,
+      fMethod: f.paymentMethodName, fSettle: f.settle,
+      fSettleAmount: f.settlementAmount, fSettleCurrency: f.settlementCurrencyCode,
+      onAmount: e => this.setForm({ amount: e.target.value }),
+      onCurrency: e => this.setForm({ currencyCode: e.target.value }),
+      onDate: e => this.setForm({ expenseDate: e.target.value }),
+      onDesc: e => this.setForm({ description: e.target.value }),
+      onMethod: e => this.setForm({ paymentMethodName: e.target.value }),
+      onSettleToggle: e => this.setForm({ settle: e.target.checked }),
+      onSettleAmount: e => this.setForm({ settlementAmount: e.target.value }),
+      onSettleCurrency: e => this.setForm({ settlementCurrencyCode: e.target.value }),
+      tagChips: s.tags.map(t => {
+        const on = f.tagNames.indexOf(t.name) >= 0;
+        return {
+          name: t.name,
+          bg: on ? 'var(--color-chip-bg)' : 'transparent',
+          border: on ? 'var(--color-accent)' : 'var(--color-divider)',
+          color: on ? 'var(--color-chip-ink)' : 'var(--color-text)',
+          onToggle: () => this.setForm({ tagNames: on ? f.tagNames.filter(n => n !== t.name) : f.tagNames.concat([t.name]) })
+        };
+      }),
+      formError: s.error ? s.error.detail : '',
+      formStatus: s.error ? s.error.status + ' · application/problem+json' : '',
+
+      pAmount: s.price.amount, pCurrency: s.price.currency,
+      onPriceAmount: e => this.setState(st => ({ price: Object.assign({}, st.price, { amount: e.target.value }) })),
+      onPriceCurrency: e => this.setState(st => ({ price: Object.assign({}, st.price, { currency: e.target.value }) })),
+
+      budgetAmount: s.budgetForm.amount, budgetCurrency: s.budgetForm.currency,
+      budgetMsg: s.budgetMsg,
+      onBudgetAmount: e => this.setState(st => ({ budgetForm: Object.assign({}, st.budgetForm, { amount: e.target.value }), budgetMsg: '' })),
+      onBudgetCurrency: e => this.setState(st => ({ budgetForm: Object.assign({}, st.budgetForm, { currency: e.target.value }) })),
+      createBudget: () => this.setState(st => {
+        const n = Number(st.budgetForm.amount);
+        if (!n || n <= 0) return { budgetMsg: 'amount must be a positive amount (400)' };
+        return { budgetMsg: 'Presupuesto de octubre creado: ' + this.fmt(n.toFixed(2), st.budgetForm.currency) };
+      })
+    }, bVals);
+  }
+}
+
+</script>
+</body>
+</html>
