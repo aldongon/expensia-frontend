@@ -4,6 +4,7 @@ import { ChipToggle } from '@/components/ui/chip-toggle';
 import { SegmentedControl } from '@/components/ui/segmented-control';
 import { scaleOf } from '@/lib/currency';
 import { sumScaled } from '@/lib/decimal';
+import { expenseLabel } from '@/lib/expense-label';
 import { formatAmount, formatDayMonth } from '@/lib/format';
 import { dayOfMonth, todayIso } from '@/lib/month';
 import { useExpenseFiltersStore } from '@/stores/expense-filters-store';
@@ -25,9 +26,10 @@ interface SelectionViewProps {
   expenses: ExpenseResponse[];
   tags: TagResponse[];
   currencies: CurrencyResponse[];
+  recurringNames: Map<number, string>;
 }
 
-export function SelectionView({ expenses, tags, currencies }: SelectionViewProps) {
+export function SelectionView({ expenses, tags, currencies, recurringNames }: SelectionViewProps) {
   const selectedTags = useExpenseFiltersStore((state) => state.selectedTags);
   const recMode = useExpenseFiltersStore((state) => state.recMode);
   const toggleTag = useExpenseFiltersStore((state) => state.toggleTag);
@@ -211,7 +213,7 @@ export function SelectionView({ expenses, tags, currencies }: SelectionViewProps
               {formatDayMonth(expense.expenseDate)}
             </span>
             <div className="mr-auto flex flex-wrap items-center gap-1.5">
-              <span className="text-sm">{expense.description || '(sin descripción)'}</span>
+              <span className="text-sm">{expenseLabel(expense, recurringNames)}</span>
               {expense.recurringExpenseId !== null ? (
                 <span className="tag tag-neutral">auto</span>
               ) : null}

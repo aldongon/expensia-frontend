@@ -49,6 +49,7 @@ function dayTotalLabel(items: ExpenseResponse[], currencies: CurrencyResponse[])
 interface ByDayViewProps {
   expenses: ExpenseResponse[];
   currencies: CurrencyResponse[];
+  recurringNames: Map<number, string>;
   onEdit: (expense: ExpenseResponse) => void;
   onDelete: (expense: ExpenseResponse) => void;
   onGoRecurring: (recurringExpenseId: number) => void;
@@ -57,6 +58,7 @@ interface ByDayViewProps {
 export function ByDayView({
   expenses,
   currencies,
+  recurringNames,
   onEdit,
   onDelete,
   onGoRecurring,
@@ -105,6 +107,7 @@ export function ByDayView({
                     key={expense.id}
                     expense={expense}
                     currencies={currencies}
+                    recurringNames={recurringNames}
                     onEdit={onEdit}
                     onDelete={onDelete}
                     onGoRecurring={onGoRecurring}
