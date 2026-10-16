@@ -70,6 +70,7 @@ export type PriceChangeRequest = {
   amount: number;
   currencyCode?: string;
   paymentMethodName?: string;
+  applyToCurrentMonth?: boolean;
 };
 
 export type BudgetResponse = {

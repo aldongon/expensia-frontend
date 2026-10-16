@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { scaleOf } from '@/lib/currency';
 import { sumScaled } from '@/lib/decimal';
+import { expenseLabel, recurringNamesById } from '@/lib/expense-label';
 import { formatAmount, formatDayMonth } from '@/lib/format';
 import type { CurrencyResponse, ExpenseResponse, RecurringExpenseResponse } from '@/types/api';
 
@@ -16,6 +17,7 @@ interface RecentSectionProps {
 export function RecentSection({ expenses, recurring, currencies }: RecentSectionProps) {
   const router = useRouter();
   const recent = expenses.slice(0, 5);
+  const recurringNames = recurringNamesById(recurring);
 
   const byCurrency = new Map<string, string[]>();
   expenses.forEach((expense) => {
@@ -58,7 +60,7 @@ export function RecentSection({ expenses, recurring, currencies }: RecentSection
                 </td>
                 <td>
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span>{expense.description || '(sin descripción)'}</span>
+                    <span>{expenseLabel(expense, recurringNames)}</span>
                     {expense.recurringExpenseId !== null ? (
                       <span className="tag tag-neutral">auto</span>
                     ) : null}

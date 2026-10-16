@@ -3,12 +3,14 @@
 import { PencilSimple, Trash } from '@phosphor-icons/react';
 
 import { scaleOf } from '@/lib/currency';
+import { expenseLabel } from '@/lib/expense-label';
 import { formatAmount } from '@/lib/format';
 import type { CurrencyResponse, ExpenseResponse } from '@/types/api';
 
 interface DayExpenseRowProps {
   expense: ExpenseResponse;
   currencies: CurrencyResponse[];
+  recurringNames: Map<number, string>;
   onEdit: (expense: ExpenseResponse) => void;
   onDelete: (expense: ExpenseResponse) => void;
   onGoRecurring: (recurringExpenseId: number) => void;
@@ -17,6 +19,7 @@ interface DayExpenseRowProps {
 export function DayExpenseRow({
   expense,
   currencies,
+  recurringNames,
   onEdit,
   onDelete,
   onGoRecurring,
@@ -30,7 +33,7 @@ export function DayExpenseRow({
     >
       <div className="mr-auto flex min-w-0 flex-col gap-0.5">
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-sm">{expense.description || '(sin descripción)'}</span>
+          <span className="text-sm">{expenseLabel(expense, recurringNames)}</span>
           {auto ? (
             <span className="tag tag-neutral" title="Ocurrencia generada por un gasto recurrente">
               auto

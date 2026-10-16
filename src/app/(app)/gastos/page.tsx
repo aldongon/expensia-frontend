@@ -16,8 +16,10 @@ import { LoadingSkeleton } from '@/components/states/loading-skeleton';
 import { useCurrencies } from '@/hooks/use-currencies';
 import { useExpenses } from '@/hooks/use-expenses';
 import { usePaymentMethods } from '@/hooks/use-payment-methods';
+import { useRecurringExpenses } from '@/hooks/use-recurring-expenses';
 import { useTags } from '@/hooks/use-tags';
 import { deleteExpense } from '@/lib/api/expenses';
+import { recurringNamesById } from '@/lib/expense-label';
 import { formatMonthYearFull } from '@/lib/format';
 import { currentMonth } from '@/lib/month';
 import { ApiProblemError } from '@/lib/problem';
@@ -34,6 +36,7 @@ export default function GastosPage() {
   const currenciesQuery = useCurrencies();
   const tagsQuery = useTags();
   const methodsQuery = usePaymentMethods();
+  const recurringQuery = useRecurringExpenses();
 
   const [tab, setTab] = useState<GastosTab>('dias');
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -43,7 +46,8 @@ export default function GastosPage() {
     expensesQuery.isLoading ||
     currenciesQuery.isLoading ||
     tagsQuery.isLoading ||
-    methodsQuery.isLoading;
+    methodsQuery.isLoading ||
+    recurringQuery.isLoading;
 
   if (isLoading) {
     return <LoadingSkeleton scope="tus gastos" />;
@@ -79,6 +83,7 @@ export default function GastosPage() {
   const currencies = currenciesQuery.data ?? [];
   const tags = tagsQuery.data ?? [];
   const methods = methodsQuery.data ?? [];
+  const recurringNames = recurringNamesById(recurringQuery.data ?? []);
 
   async function handleDelete(expense: ExpenseResponse) {
     try {
@@ -150,12 +155,18 @@ export default function GastosPage() {
         <ByDayView
           expenses={expenses}
           currencies={currencies}
+          recurringNames={recurringNames}
           onEdit={openEdit}
           onDelete={handleDelete}
           onGoRecurring={(id) => router.push(`/recurrentes?id=${id}`)}
         />
       ) : (
-        <SelectionView expenses={expenses} tags={tags} currencies={currencies} />
+        <SelectionView
+          expenses={expenses}
+          tags={tags}
+          currencies={currencies}
+          recurringNames={recurringNames}
+        />
       )}
 
       <ExpenseDialog
