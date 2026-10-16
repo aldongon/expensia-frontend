@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
+import { SegmentedControl } from '@/components/ui/segmented-control';
 import { DialogShell } from '@/components/ui/dialog-shell';
 import { ProblemBanner } from '@/components/ui/problem-banner';
 import { changeRecurringExpensePrice } from '@/lib/api/recurring-expenses';
@@ -30,6 +31,7 @@ export function PriceChangeDialog({
   const queryClient = useQueryClient();
   const [amount, setAmount] = useState('');
   const [currencyCode, setCurrencyCode] = useState('');
+  const [effective, setEffective] = useState<'next' | 'current'>('next');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<{ detail: string; status: string } | null>(null);
 
@@ -37,6 +39,7 @@ export function PriceChangeDialog({
     if (open && item?.currentRule) {
       setAmount('');
       setCurrencyCode(item.currentRule.currencyCode);
+      setEffective('next');
       setError(null);
     }
   }, [open, item]);
@@ -71,10 +74,15 @@ export function PriceChangeDialog({
     setError(null);
 
     try {
-      await changeRecurringExpensePrice(item.id, { amount: Number(amount), currencyCode });
+      await changeRecurringExpensePrice(item.id, {
+        amount: Number(amount),
+        currencyCode,
+        applyToCurrentMonth: effective === 'current',
+      });
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: queryKeys.recurringExpenses() }),
         queryClient.invalidateQueries({ queryKey: queryKeys.expenses(currentMonth()) }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.budgetCurrent() }),
       ]);
       toast.success('Precio actualizado');
       close();
@@ -96,8 +104,22 @@ export function PriceChangeDialog({
       title="Cambiar precio"
     >
       <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+        <div className="field">
+          <label>Rige desde</label>
+          <SegmentedControl
+            name="price-change-effective"
+            value={effective}
+            onChange={setEffective}
+            options={[
+              { value: 'next', label: 'Próximo mes' },
+              { value: 'current', label: 'Este mes' },
+            ]}
+          />
+        </div>
         <p className="dialog-body m-0">
-          Rige desde el próximo mes. La ocurrencia de este mes no cambia.
+          {effective === 'next'
+            ? 'La ocurrencia de este mes no cambia.'
+            : 'También se actualiza el gasto ya generado de este mes.'}
         </p>
 
         <div className="grid grid-cols-[1fr_110px] gap-3">
