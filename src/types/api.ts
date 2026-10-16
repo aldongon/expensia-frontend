@@ -73,6 +73,10 @@ export type PriceChangeRequest = {
   applyToCurrentMonth?: boolean;
 };
 
+export type CancellationRequest = {
+  applyToCurrentMonth?: boolean;
+};
+
 export type BudgetResponse = {
   id: number;
   month: string;

@@ -1,5 +1,6 @@
 import { apiFetch, ensureOk } from '@/lib/api-fetch';
 import type {
+  CancellationRequest,
   CreateRecurringExpenseRequest,
   PriceChangeRequest,
   RecurringExpenseResponse,
@@ -58,9 +59,14 @@ export async function changeRecurringExpensePrice(
   return response.json() as Promise<RecurringExpenseResponse>;
 }
 
-export async function cancelRecurringExpense(id: number): Promise<RecurringExpenseResponse> {
+export async function cancelRecurringExpense(
+  id: number,
+  payload: CancellationRequest
+): Promise<RecurringExpenseResponse> {
   const response = await apiFetch(`/api/recurring-expenses/${id}/cancellation`, {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
   });
 
   await ensureOk(response, 'No se pudo cancelar el recurrente.');

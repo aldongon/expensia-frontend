@@ -1,14 +1,10 @@
 'use client';
 
-import { useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useState } from 'react';
 
+import { CancelRecurringDialog } from '@/components/recurring/cancel-recurring-dialog';
 import { scaleOf } from '@/lib/currency';
 import { formatAmount, formatMonthYear } from '@/lib/format';
-import { cancelRecurringExpense } from '@/lib/api/recurring-expenses';
-import { ApiProblemError } from '@/lib/problem';
-import { queryKeys } from '@/lib/query-keys';
-import { currentMonth } from '@/lib/month';
 import type { CurrencyResponse, RecurringExpenseResponse } from '@/types/api';
 
 interface RecurringDetailProps {
@@ -18,24 +14,9 @@ interface RecurringDetailProps {
 }
 
 export function RecurringDetail({ item, currencies, onChangePrice }: RecurringDetailProps) {
-  const queryClient = useQueryClient();
+  const [cancelOpen, setCancelOpen] = useState(false);
   const cancelled = item.currentRule === null;
   const timeline = [...item.ruleHistory].reverse();
-
-  async function handleCancel() {
-    try {
-      await cancelRecurringExpense(item.id);
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: queryKeys.recurringExpenses() }),
-        queryClient.invalidateQueries({ queryKey: queryKeys.expenses(currentMonth()) }),
-      ]);
-      toast.success('Recurrente cancelado');
-    } catch (error) {
-      toast.error(
-        error instanceof ApiProblemError ? error.message : 'No se pudo cancelar el recurrente.'
-      );
-    }
-  }
 
   return (
     <div
@@ -94,19 +75,19 @@ export function RecurringDetail({ item, currencies, onChangePrice }: RecurringDe
       </div>
 
       {cancelled ? (
-        <p className="text-xs opacity-55">
-          Cancelado: ya no genera ocurrencias. La del mes en curso se conserva.
-        </p>
+        <p className="text-xs opacity-55">Cancelado: ya no genera ocurrencias.</p>
       ) : (
         <div className="flex flex-wrap gap-3">
           <button type="button" className="btn btn-primary" onClick={onChangePrice}>
             Cambiar precio
           </button>
-          <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+          <button type="button" className="btn btn-secondary" onClick={() => setCancelOpen(true)}>
             Cancelar
           </button>
         </div>
       )}
+
+      <CancelRecurringDialog open={cancelOpen} onOpenChange={setCancelOpen} item={item} />
     </div>
   );
 }
