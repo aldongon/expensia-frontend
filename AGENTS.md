@@ -74,7 +74,7 @@ src/
     ui/                    # thin wrappers (tooltip, sonner, button)
   lib/
     api-fetch.ts          # Authenticated fetch wrapper
-    auth-client.ts        # Login call + apiUrl()
+    auth-client.ts        # Google sign-in token exchange + apiUrl()
     problem.ts            # RFC 9457 problem+json parsing and ApiProblemError
     decimal.ts            # Exact scaled-integer arithmetic over amount strings (no float sums)
     format.ts             # es-AR amount/date formatting
@@ -101,7 +101,10 @@ src/
 ## Auth And API Rules
 
 - Use `apiFetch` from `@/lib/api-fetch` for authenticated backend calls.
-- Use `login` from `@/lib/auth-client` for the login call.
+- Sign-in is Google-only: `GoogleSignInButton` (`components/auth/`) renders Google Identity
+  Services' button with `NEXT_PUBLIC_GOOGLE_CLIENT_ID`; its ID token goes through
+  `useAuthStore().signInWithGoogle`, which calls `loginWithGoogle` from `@/lib/auth-client`
+  (`POST /api/auth/google`) for the API's JWT. There is no email/password login.
 - Do not call `fetch` directly for authenticated app APIs.
 - `apiFetch` reads the token from `useAuthStore.getState()` and sends
   `Authorization: Bearer <token>`. There is no refresh token and no cookie: a `401` clears the
