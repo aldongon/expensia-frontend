@@ -18,11 +18,16 @@ export function apiUrl(path: string) {
   return authUrl(path.startsWith('/') ? path : `/${path}`);
 }
 
-export async function login(email: string, password: string): Promise<TokenResponse> {
-  const response = await fetch(authUrl('/api/auth/login'), {
+/**
+ * Exchanges the Google ID token returned by Google Identity Services for the API's own JWT. The
+ * browser's timezone is only used by the backend when this sign-in creates the account.
+ */
+export async function loginWithGoogle(idToken: string): Promise<TokenResponse> {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const response = await fetch(authUrl('/api/auth/google'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ idToken, timezone }),
   });
 
   if (!response.ok) {

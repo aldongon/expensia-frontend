@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { login as loginRequest } from '@/lib/auth-client';
+import { loginWithGoogle } from '@/lib/auth-client';
 
 type AuthStatus = 'checking' | 'authenticated' | 'unauthenticated';
 
@@ -13,8 +13,22 @@ interface AuthState {
   expiresAt: string | null;
   email: string | null;
   initialize: () => void;
-  signIn: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: (credential: string) => Promise<void>;
   clearAuth: () => void;
+}
+
+/**
+ * Reads the email claim from a Google ID token for display only. The token is not verified here —
+ * the backend verifies it — so nothing security-relevant may depend on this value.
+ */
+function emailFromGoogleCredential(credential: string): string | null {
+  try {
+    const payload = credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+    const claims = JSON.parse(atob(payload)) as { email?: unknown };
+    return typeof claims.email === 'string' ? claims.email : null;
+  } catch {
+    return null;
+  }
 }
 
 function isExpired(expiresAt: string | null) {
@@ -41,14 +55,14 @@ export const useAuthStore = create<AuthState>()(
           set({ status: 'unauthenticated', token: null, expiresAt: null });
         }
       },
-      signIn: async (email, password) => {
-        const auth = await loginRequest(email, password);
+      signInWithGoogle: async (credential) => {
+        const auth = await loginWithGoogle(credential);
 
         set({
           status: 'authenticated',
           token: auth.token,
           expiresAt: auth.expiresAt,
-          email,
+          email: emailFromGoogleCredential(credential),
         });
       },
       clearAuth: () => {

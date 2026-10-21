@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { type FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import { ProblemBanner } from '@/components/ui/problem-banner';
 import { ApiProblemError } from '@/lib/problem';
 import { useAuthStore } from '@/stores/auth-store';
@@ -10,9 +11,7 @@ import { useAuthStore } from '@/stores/auth-store';
 export default function LoginPage() {
   const router = useRouter();
   const status = useAuthStore((state) => state.status);
-  const signIn = useAuthStore((state) => state.signIn);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const signInWithGoogle = useAuthStore((state) => state.signInWithGoogle);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<{ detail: string; status: string } | null>(null);
 
@@ -22,19 +21,12 @@ export default function LoginPage() {
     }
   }, [router, status]);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleCredential(credential: string) {
     setError(null);
-
-    if (!email.trim() || !password) {
-      setError({ detail: 'Ingresá tu email y tu contraseña.', status: '400 Bad Request' });
-      return;
-    }
-
     setSubmitting(true);
 
     try {
-      await signIn(email.trim(), password);
+      await signInWithGoogle(credential);
       router.replace('/resumen');
     } catch (submitError) {
       if (submitError instanceof ApiProblemError) {
@@ -82,42 +74,20 @@ export default function LoginPage() {
         <div className="flex flex-col gap-6 p-8" style={{ background: 'var(--color-surface)' }}>
           <div className="flex flex-col gap-1">
             <h2>Iniciar sesión</h2>
-            <p className="text-sm opacity-70">Usá tu email y contraseña para continuar.</p>
+            <p className="text-sm opacity-70">Usá tu cuenta de Google para continuar.</p>
           </div>
 
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div className="field">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="username"
-                className="input"
-                value={email}
-                disabled={submitting}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
+          <div className="flex flex-col gap-4">
+            <GoogleSignInButton onCredential={handleCredential} disabled={submitting} />
 
-            <div className="field">
-              <label htmlFor="password">Contraseña</label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                className="input"
-                value={password}
-                disabled={submitting}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
+            {submitting ? (
+              <p className="text-center text-sm opacity-70" role="status">
+                Entrando…
+              </p>
+            ) : null}
 
             {error ? <ProblemBanner detail={error.detail} status={error.status} /> : null}
-
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? 'Entrando…' : 'Entrar'}
-            </button>
-          </form>
+          </div>
         </div>
       </section>
     </main>
